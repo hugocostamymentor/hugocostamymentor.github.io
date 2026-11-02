@@ -19,22 +19,38 @@
   }
   function ordenar(l) { return (l || []).slice().sort(function (a, b) { return (b.data || "").localeCompare(a.data || ""); }); }
   function destino(i) { return i.arquivo || i.url || "#"; }
+  /* Rótulo "Novo": some 15 dias após "publicado" (ou ao abrir o item neste aparelho, ids em localStorage "mm_vistos"). */
+  var DIAS_NOVO = 15, HOJE_PADRAO = "2026-11-02";
+  function nid(i) { return String(i.id || i.url || i.arquivo || i.titulo || ""); }
+  function vistos() { try { return JSON.parse(localStorage.getItem("mm_vistos") || "[]"); } catch (e) { return []; } }
+  function marcarVisto(id) {
+    if (!id) return; var v = vistos(); if (v.indexOf(id) >= 0) return;
+    v.push(id); try { localStorage.setItem("mm_vistos", JSON.stringify(v)); } catch (e) {}
+    document.querySelectorAll('[data-nid="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"] .novo').forEach(function (n) { n.remove(); });
+  }
+  function ehNovo(i, agora) {
+    if (!i.novo) return false;
+    var p = /^\d{4}-\d{2}-\d{2}$/.test(i.publicado || "") ? i.publicado : HOJE_PADRAO;
+    var fim = new Date(p + "T00:00:00").getTime() + DIAS_NOVO * 864e5;
+    if ((agora || Date.now()) >= fim) return false;
+    return vistos().indexOf(nid(i)) < 0;
+  }
   var TIPOS = { teste: "Teste", pdf: "Guia em PDF", audio: "Áudio", video: "Vídeo", youtube: "Vídeo", aviso: "Novidade", link: "Link" };
 
   function meta(i) {
     return '<div class="meta"><span class="rotulo">' + esc(TIPOS[i.tipo] || i.tipo || "") + " · " + esc(data(i.data)) + (i.tempo ? " · " + esc(i.tempo) : "") + "</span>" +
-      (i.novo ? '<span class="novo">Novo</span>' : "") + "</div>";
+      (ehNovo(i) ? '<span class="novo">Novo</span>' : "") + "</div>";
   }
   function card(i, secao) {
     var href = destino(i), extra = "";
     if (i.tipo === "teste") href = "#/abrir/" + encodeURIComponent(secao) + "/" + encodeURIComponent(i.id);
     else if (i.tipo === "pdf" || i.tipo === "link") extra = ' target="_blank" rel="noopener"';
-    return '<a class="card" href="' + esc(href) + '"' + extra + ">" + meta(i) + "<h3>" + esc(i.titulo) + "</h3><p>" + esc(i.descricao) + "</p></a>";
+    return '<a class="card" data-nid="' + esc(nid(i)) + '" href="' + esc(href) + '"' + extra + ">" + meta(i) + "<h3>" + esc(i.titulo) + "</h3><p>" + esc(i.descricao) + "</p></a>";
   }
 
   /* Componente de áudio com controles próprios */
   function audio(i) {
-    return '<div class="player" data-src="' + esc(destino(i)) + '">' + meta(i) + "<h3>" + esc(i.titulo) + "</h3><p class=\"sec\">" + esc(i.descricao) + "</p>" +
+    return '<div class="player" data-nid="' + esc(nid(i)) + '" data-src="' + esc(destino(i)) + '">' + meta(i) + "<h3>" + esc(i.titulo) + "</h3><p class=\"sec\">" + esc(i.descricao) + "</p>" +
       '<div class="ctrl"><button class="play" aria-label="Reproduzir">▶</button><input type="range" min="0" max="100" value="0" step="0.1" aria-label="Posição"><span class="tempo">0:00 / 0:00</span></div></div>';
   }
   function youtubeId(u) { var m = /(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/.exec(u || ""); return m ? m[1] : null; }
@@ -45,7 +61,7 @@
       var capa = i.capa || ("https://i.ytimg.com/vi/" + yt + "/hqdefault.jpg");
       midia = '<button class="yt-capa" data-yt="' + yt + '" aria-label="Assistir: ' + esc(i.titulo) + '"><img src="' + esc(capa) + '" alt="" loading="lazy"><span class="yt-play">▶</span></button>';
     } else midia = '<video controls playsinline preload="metadata" src="' + esc(u) + '"' + (i.capa ? ' poster="' + esc(i.capa) + '"' : "") + "></video>";
-    return '<div class="player">' + meta(i) + "<h3>" + esc(i.titulo) + '</h3><div class="video">' + midia + "</div>" +
+    return '<div class="player" data-nid="' + esc(nid(i)) + '">' + meta(i) + "<h3>" + esc(i.titulo) + '</h3><div class="video">' + midia + "</div>" +
       (i.descricao ? '<p class="sec">' + esc(i.descricao) + "</p>" : "") +
       (yt ? '<p style="margin:0"><a class="link" href="https://youtu.be/' + yt + '" target="_blank" rel="noopener">Abrir no YouTube</a></p>' : "") + "</div>";
   }
@@ -68,6 +84,17 @@
     });
   }
 
+  function ligarVistos() {
+    if (ligarVistos.ok) return; ligarVistos.ok = true;
+    var f = function (e) {
+      var el = e.target && e.target.closest && e.target.closest("[data-nid]");
+      if (!el) return;
+      if (el.tagName === "A" || e.type === "play" || e.target.closest("button,a,video")) marcarVisto(el.dataset.nid);
+    };
+    document.addEventListener("click", f, true);
+    document.addEventListener("play", f, true);
+  }
+  window.MMNovo = { ehNovo: ehNovo, marcarVisto: marcarVisto, nid: nid };
   function vazio(secao) {
     return '<div class="vazio"><p class="rotulo">' + esc(SECOES[secao].rotulo) + "</p><h2>Em breve</h2><p class=\"sec\">" + esc(SECOES[secao].vazio) + "</p></div>";
   }
@@ -142,6 +169,7 @@
   function telaAbrir(secao, id) {
     var i = (conteudo.secoes[secao] || []).filter(function (x) { return x.id === id; })[0];
     if (!i) return telaSecao(secao);
+    marcarVisto(nid(i));
     return '<p><a class="link" href="#/' + esc(secao) + '">← Voltar</a></p>' +
       '<iframe src="' + esc(destino(i)) + '" title="' + esc(i.titulo) + '" style="width:100%;height:calc(100vh - 230px);border:1px solid rgba(168,134,85,.4);background:#fff"></iframe>' +
       (i.tipo === "teste" ? '<p class="nota">' + NOTA_TESTES + "</p>" : "");
@@ -183,7 +211,7 @@
 
   function carregarConteudo() {
     return fetch("content.json", { cache: "no-cache" }).then(function (r) { return r.json(); })
-      .then(function (c) { conteudo = c; rotear(); })
+      .then(function (c) { conteudo = c; ligarVistos(); rotear(); })
       .catch(function () { $("conteudo").innerHTML = '<h1>Sem conexão</h1><p class="sec">Não foi possível carregar o conteúdo. Tente de novo quando estiver online.</p>'; });
   }
 
