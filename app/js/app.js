@@ -154,7 +154,7 @@
     document.querySelectorAll("audio").forEach(function (a) { a.pause(); });
     document.querySelectorAll(".player[data-src]").forEach(function (p) { p._audio && p._audio.pause(); });
     if (aba === "abrir") { html = telaAbrir(partes[1], partes[2]); aba = partes[1]; }
-    else if (aba === "precos") html = telaPrecos();
+    else if (aba === "precos") html = '<div class="pg-precos">' + telaPrecos() + '</div>';
     else if (SECOES[aba]) html = telaSecao(aba);
     else { aba = "inicio"; html = telaInicio(); }
     var main = $("conteudo"); main.innerHTML = html; window.scrollTo(0, 0);
