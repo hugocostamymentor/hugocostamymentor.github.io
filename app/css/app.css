@@ -1,7 +1,7 @@
 @font-face{font-family:"Fraunces";src:url(../assets/fonts/Fraunces.ttf) format("truetype");font-weight:100 900;font-display:swap}
 @font-face{font-family:"Manrope";src:url(../assets/fonts/Manrope.ttf) format("truetype");font-weight:200 800;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url(../assets/fonts/IBMPlexMono-Medium.ttf) format("truetype");font-weight:500;font-display:swap}
-:root{--obs:#17140F;--osso:#EEE7DB;--oxido:#9E3B24;--bronze:#A88655;--pedra:#8C857A;--tab-h:64px;
+:root{--obs:#17140F;--osso:#EEE7DB;--oxido:#9E3B24;--bronze:#A88655;--champanhe:#C8A46A;--pedra:#8C857A;--tab-h:64px;
 --serif:"Fraunces",Georgia,serif;--sans:"Manrope",Arial,sans-serif;--mono:"IBM Plex Mono","Courier New",monospace}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--obs);color:var(--osso);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
@@ -64,18 +64,18 @@ main{padding:22px 20px calc(var(--tab-h) + env(safe-area-inset-bottom) + 28px);m
 .yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--oxido);color:var(--osso);display:flex;align-items:center;justify-content:center;font-size:1.2rem;padding-left:4px}
 /* preços */
 .pr-intro{margin-bottom:6px}
-.integral{position:relative;margin:22px 0 30px;padding:30px 22px 26px;border:1px solid var(--oxido);background:linear-gradient(180deg,rgba(158,59,36,.13),rgba(23,20,15,0) 55%);box-shadow:0 0 0 1px rgba(158,59,36,.25),0 18px 50px -18px rgba(158,59,36,.55)}
-.integral:before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:2px;background:var(--oxido)}
-.integral .rotulo{color:var(--oxido);letter-spacing:.26em}
+.integral{position:relative;margin:22px 0 30px;padding:30px 22px 26px;border:1px solid rgba(200,164,106,.7);background:linear-gradient(180deg,rgba(200,164,106,.10),rgba(23,20,15,0) 55%);box-shadow:0 0 0 1px rgba(200,164,106,.14),0 18px 50px -20px rgba(200,164,106,.35)}
+.integral:before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:2px;background:var(--champanhe)}
+.integral .rotulo{color:var(--champanhe);letter-spacing:.26em}
 .integral h2{font-size:2.15rem;font-weight:300;font-style:italic;margin:.35em 0 .3em;letter-spacing:-.01em}
 .integral .lead{color:var(--osso);opacity:.85;font-size:.98rem;margin:0 0 18px}
 .integral ul{list-style:none;padding:0;margin:0 0 6px}
 .integral li{padding:9px 0 9px 22px;position:relative;border-top:1px solid rgba(168,134,85,.22);font-size:.92rem}
-.integral li:before{content:"";position:absolute;left:2px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--oxido)}
+.integral li:before{content:"";position:absolute;left:2px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--champanhe)}
 .plano-i{margin-top:22px;padding:20px 0 4px;border-top:1px solid var(--bronze)}
 .plano-i .topo-p{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
 .plano-i h3{font-size:1.35rem;margin:.25em 0 0}
-.valor{font-family:var(--serif);color:var(--oxido);font-size:2.1rem;line-height:1;white-space:nowrap}
+.valor{font-family:var(--serif);color:var(--champanhe);font-size:2.1rem;line-height:1;white-space:nowrap}
 .valor small{font-size:.5em;color:var(--pedra);margin-right:3px}
 .plano-i ul li{border:0;padding:4px 0 4px 18px;color:var(--pedra)}
 .plano-i ul li:before{width:5px;height:5px;top:12px;background:var(--bronze)}
@@ -95,3 +95,7 @@ main{padding:22px 20px calc(var(--tab-h) + env(safe-area-inset-bottom) + 28px);m
 .wa-flutuante{position:fixed;right:16px;bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 16px);z-index:9;width:54px;height:54px;border-radius:50%;background:var(--oxido);color:var(--osso);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.45)}
 .wa-flutuante svg{width:26px;height:26px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 84px);z-index:30;background:var(--osso);color:var(--obs);padding:10px 16px;font-size:.88rem}
+
+/* Preços: sem Óxido — botões em champanhe */
+.pg-precos .btn.primario{background:var(--champanhe);border-color:var(--champanhe);color:var(--obs)}
+.pg-precos .btn.primario svg{stroke:var(--obs);fill:currentColor}
