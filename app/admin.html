@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>My Mentor — Painel de acesso</title>
+<meta name="theme-color" content="#17140F">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<style>
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces.ttf) format("truetype");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Manrope";src:url(assets/fonts/Manrope.ttf) format("truetype");font-weight:200 800;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(assets/fonts/IBMPlexMono-Medium.ttf) format("truetype");font-weight:500;font-display:swap}
+:root{--obs:#17140F;--osso:#EEE7DB;--oxido:#9E3B24;--bronze:#A88655;--champ:#C8A46A;--pedra:#8C857A;--serif:"Fraunces",Georgia,serif;--sans:"Manrope",Arial,sans-serif;--mono:"IBM Plex Mono","Courier New",monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--obs);color:var(--osso);font:16px/1.5 var(--sans)}
+main{max-width:760px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 24px) 20px 48px}
+header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(168,134,85,.4);padding-bottom:14px;margin-bottom:24px}
+header img{height:34px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0 0 .4em}
+h1{font-size:1.9rem}h2{font-size:1.35rem}
+.rotulo{font:500 .7rem var(--mono);text-transform:uppercase;letter-spacing:.18em;color:var(--bronze);margin:0 0 6px}
+label{display:block;font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.18em;color:var(--bronze);margin:14px 0 6px}
+input,select{width:100%;padding:13px 14px;background:transparent;border:1px solid rgba(168,134,85,.6);color:var(--osso);font:1rem var(--sans);border-radius:0}
+select option{color:#000}
+input:focus,select:focus{outline:none;border-color:var(--champ)}
+.btn{display:inline-block;font:600 .92rem var(--sans);padding:12px 18px;border:1px solid var(--bronze);background:transparent;color:var(--osso);cursor:pointer;text-decoration:none;text-align:center}
+.btn.primario{background:var(--champ);border-color:var(--champ);color:var(--obs)}
+.btn.perigo{border-color:var(--oxido);color:var(--osso);padding:7px 12px;font-size:.8rem}
+.btn:disabled{opacity:.5;cursor:default}
+.bloco{width:100%;margin-top:18px}
+.caixa{border:1px solid rgba(168,134,85,.4);padding:20px;margin-bottom:26px}
+.codigo{font:500 1.7rem var(--mono);letter-spacing:.14em;color:var(--champ);margin:6px 0 14px;word-break:break-all}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.erro{color:#e08a72;min-height:1.2em;font-size:.9rem;margin:10px 0 0}
+.sec{color:var(--pedra);font-size:.85rem}
+.oculto{display:none!important}
+.linha{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid rgba(140,133,122,.35);padding:14px 0}
+.linha b{font-weight:600}
+.linha .meta{font:500 .72rem var(--mono);letter-spacing:.08em;color:var(--pedra);margin-top:3px}
+.st{font:500 .62rem var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--pedra);color:var(--pedra);white-space:nowrap}
+.st.ativo{border-color:var(--champ);color:var(--champ)}.st.pend{border-color:var(--bronze);color:var(--osso)}.st.bloq{border-color:var(--oxido);background:var(--oxido);color:var(--osso)}
+.topo-lista{display:flex;justify-content:space-between;align-items:baseline}
+.link{background:none;border:0;color:var(--bronze);font:500 .68rem var(--mono);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;padding:0}
+@media (max-width:480px){.acoes{grid-template-columns:1fr}.linha{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<main>
+  <header><img src="assets/img/logo_sem-tagline_fundo-escuro.png" alt="My Mentor"><button class="link oculto" id="sair" type="button">Sair</button></header>
+
+  <section id="tela-login">
+    <p class="rotulo">Painel de acesso</p>
+    <h1>Entrar como administrador</h1>
+    <form id="form-login">
+      <label for="senha">Senha de administrador</label>
+      <input id="senha" type="password" autocomplete="current-password" required>
+      <p class="erro" id="erro-login" role="alert"></p>
+      <button class="btn primario bloco" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section id="tela-painel" class="oculto">
+    <div class="caixa">
+      <p class="rotulo">Novo código</p>
+      <h2>Liberar acesso para um cliente</h2>
+      <form id="form-codigo">
+        <label for="nome">Nome do cliente</label>
+        <input id="nome" type="text" maxlength="80" required placeholder="Ex.: Maria Souza">
+        <label for="validade">Validade do código (para ser usado)</label>
+        <select id="validade">
+          <option value="24" selected>24 horas</option>
+          <option value="48">48 horas</option>
+          <option value="72">3 dias</option>
+          <option value="168">7 dias</option>
+        </select>
+        <p class="erro" id="erro-codigo" role="alert"></p>
+        <button class="btn primario bloco" type="submit">Gerar código</button>
+      </form>
+      <div id="resultado" class="oculto" style="margin-top:22px">
+        <p class="rotulo" id="res-nome"></p>
+        <div class="codigo" id="res-codigo"></div>
+        <div class="acoes">
+          <button class="btn" id="copiar" type="button">Copiar código</button>
+          <a class="btn primario" id="whats" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+        </div>
+        <p class="sec" id="res-validade" style="margin-top:10px"></p>
+      </div>
+    </div>
+
+    <div class="topo-lista"><h2>Códigos e aparelhos</h2><button class="link" id="atualizar" type="button">Atualizar</button></div>
+    <p class="erro" id="erro-lista"></p>
+    <div id="lista"></div>
+  </section>
+</main>
+<script src="config.js"></script>
+<script>
+(function () {
+  var URL_W = String(self.MM_WORKER_URL || "").replace(/\/+$/, "");
+  var LINK_APP = "https://hugocostamymentor.github.io/app/";
+  var K = "mm_admin_sessao";
+  var $ = function (id) { return document.getElementById(id); };
+  var sessao = null;
+  try { sessao = JSON.parse(sessionStorage.getItem(K) || "null"); } catch (e) {}
+  if (sessao && sessao.expira < Date.now()) sessao = null;
+
+  function api(metodo, rota, corpo) {
+    var h = { "Content-Type": "application/json" };
+    if (sessao) h.Authorization = "Bearer " + sessao.token;
+    return fetch(URL_W + rota, { method: metodo, headers: h, body: corpo ? JSON.stringify(corpo) : undefined, cache: "no-store" })
+      .catch(function () { throw new Error("Sem conexão com o servidor."); })
+      .then(function (r) {
+        return r.json().catch(function () { return { ok: false, erro: "Resposta inválida." }; }).then(function (j) {
+          if (r.status === 401 && rota !== "/admin/login") { sair(); }
+          if (!j.ok) throw new Error(j.erro || "Erro.");
+          return j;
+        });
+      });
+  }
+  function data(ms) { return new Date(ms).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; }); }
+  function mostrar(logado) {
+    $("tela-login").classList.toggle("oculto", logado); $("tela-painel").classList.toggle("oculto", !logado);
+    $("sair").classList.toggle("oculto", !logado);
+    if (logado) carregar();
+  }
+  function sair() { sessao = null; sessionStorage.removeItem(K); mostrar(false); }
+
+  $("form-login").onsubmit = function (e) {
+    e.preventDefault(); $("erro-login").textContent = "";
+    api("POST", "/admin/login", { password: $("senha").value }).then(function (j) {
+      sessao = { token: j.token, expira: j.expira }; sessionStorage.setItem(K, JSON.stringify(sessao));
+      $("senha").value = ""; mostrar(true);
+    }).catch(function (err) { $("erro-login").textContent = err.message; });
+  };
+  $("sair").onclick = sair;
+
+  $("form-codigo").onsubmit = function (e) {
+    e.preventDefault(); $("erro-codigo").textContent = "";
+    var nome = $("nome").value.trim();
+    if (!nome) { $("erro-codigo").textContent = "Informe o nome do cliente."; return; }
+    api("POST", "/admin/codes", { nome: nome, validadeHoras: Number($("validade").value) }).then(function (j) {
+      $("res-nome").textContent = j.nome;
+      $("res-codigo").textContent = j.codigo;
+      $("res-validade").textContent = "Válido para ativação até " + data(j.expira) + ". Uso único: funciona em um só aparelho.";
+      var primeiro = j.nome.split(" ")[0];
+      var msg = "Olá, " + primeiro + "! Seu acesso ao app My Mentor foi liberado.\n\n" +
+        "1. Abra: " + LINK_APP + "\n2. Digite o código: " + j.codigo + "\n\n" +
+        "O código é pessoal, vale para um único aparelho e expira em " + data(j.expira) + ".";
+      $("whats").href = "https://wa.me/?text=" + encodeURIComponent(msg);
+      $("resultado").classList.remove("oculto");
+      $("nome").value = "";
+      carregar();
+    }).catch(function (err) { $("erro-codigo").textContent = err.message; });
+  };
+  $("copiar").onclick = function () {
+    var c = $("res-codigo").textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(c) : Promise.reject()).then(function () {
+      $("copiar").textContent = "Copiado"; setTimeout(function () { $("copiar").textContent = "Copiar código"; }, 1600);
+    }).catch(function () { prompt("Copie o código:", c); });
+  };
+  $("atualizar").onclick = carregar;
+
+  function carregar() {
+    $("erro-lista").textContent = "";
+    api("GET", "/admin/codes").then(function (j) {
+      if (!j.codigos.length) { $("lista").innerHTML = '<p class="sec">Nenhum código gerado ainda.</p>'; return; }
+      $("lista").innerHTML = j.codigos.map(function (c) {
+        var st, cls;
+        if (c.revogado) { st = "Bloqueado"; cls = "bloq"; }
+        else if (c.usado) { st = "Ativo"; cls = "ativo"; }
+        else if (c.expira < j.agora) { st = "Expirado"; cls = ""; }
+        else { st = "Aguardando uso"; cls = "pend"; }
+        var meta = esc(c.codigo) + " · criado " + data(c.criadoEm) +
+          (c.usado ? " · ativado " + data(c.usadoEm) + " · aparelho " + esc(String(c.deviceId).slice(0, 8)) : " · expira " + data(c.expira));
+        var botao = c.revogado ? "" : '<button class="btn perigo" data-codigo="' + esc(c.codigo) + '" data-nome="' + esc(c.nome) + '">Bloquear</button>';
+        return '<div class="linha"><div><b>' + esc(c.nome) + '</b> <span class="st ' + cls + '">' + st + '</span><div class="meta">' + meta + '</div></div>' + botao + '</div>';
+      }).join("");
+    }).catch(function (err) { $("erro-lista").textContent = err.message; });
+  }
+  $("lista").onclick = function (e) {
+    var b = e.target.closest("button[data-codigo]"); if (!b) return;
+    if (!confirm("Bloquear o acesso de " + b.dataset.nome + "? O app deixará de abrir no aparelho dele(a).")) return;
+    b.disabled = true;
+    api("POST", "/admin/revoke", { code: b.dataset.codigo }).then(carregar).catch(function (err) { $("erro-lista").textContent = err.message; b.disabled = false; });
+  };
+
+  mostrar(!!sessao);
+})();
+</script>
+</body>
+</html>

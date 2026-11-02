@@ -13,25 +13,27 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="My Mentor">
-<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/app.css?v=6">
 </head>
 <body>
-<!-- Tela de login -->
-<section id="tela-login" class="login oculto" aria-label="Entrar">
+<!-- Tela de código de acesso -->
+<section id="tela-login" class="login oculto" aria-label="Código de acesso">
   <img src="assets/img/logo_principal_fundo-escuro.png" alt="My Mentor — Sua força &amp; evolução">
   <p class="rotulo">Área do cliente</p>
-  <h1>Entrar</h1>
+  <h1>Digite seu código de acesso</h1>
   <form id="form-login" novalidate>
-    <label for="email">E-mail</label>
-    <input id="email" type="email" autocomplete="email" inputmode="email" required>
-    <label for="senha">Senha</label>
-    <input id="senha" type="password" autocomplete="current-password" required>
+    <label for="codigo">Código</label>
+    <input id="codigo" type="text" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" placeholder="MM-XXXX-XXXX" maxlength="14" required style="font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase">
     <p class="erro" id="login-erro" role="alert"></p>
-    <button class="btn primario bloco" type="submit">Entrar</button>
+    <button class="btn primario bloco" type="submit" id="btn-codigo">Entrar</button>
   </form>
-  <p style="text-align:center;margin-top:16px"><button class="link" id="esqueci" type="button">Esqueci minha senha</button></p>
-  <p class="sec" style="font-size:.85rem;text-align:center">O acesso é liberado por nós para clientes em acompanhamento.</p>
-  <p class="aviso-dev oculto" id="aviso-dev">Modo de desenvolvimento: Firebase não configurado</p>
+  <div class="filete"></div>
+  <p class="sec" style="font-size:.9rem;text-align:center">Ainda não tem código? O acesso é liberado por nós para clientes em acompanhamento.</p>
+  <label for="nome-pedido">Seu nome</label>
+  <input id="nome-pedido" type="text" autocomplete="name" placeholder="Nome e sobrenome">
+  <a class="btn bloco" id="pedir-acesso" href="https://api.whatsapp.com/send?phone=5531984239778" target="_blank" rel="noopener" style="text-align:center;margin-top:12px">Pedir acesso pelo WhatsApp</a>
+  <p class="sec" style="font-size:.78rem;text-align:center;margin-top:14px">Cada código vale para um único aparelho.</p>
+  <p class="aviso-dev oculto" id="aviso-dev">Servidor de acesso ainda não configurado (config.js)</p>
 </section>
 
 <!-- App -->
@@ -65,10 +67,11 @@
   </div>
 </aside>
 
-<script src="firebase-config.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/notificacoes.js"></script>
-<script src="js/instalar.js"></script>
-<script src="js/app.js"></script>
+<script src="config.js?v=7"></script>
+<script src="firebase-config.js?v=6"></script>
+<script src="js/auth.js?v=7"></script>
+<script src="js/notificacoes.js?v=6"></script>
+<script src="js/instalar.js?v=6"></script>
+<script src="js/app.js?v=7"></script>
 </body>
 </html>

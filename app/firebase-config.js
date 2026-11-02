@@ -11,6 +11,6 @@ self.MM_FIREBASE_CONFIG = {
 /* Firebase Console → Cloud Messaging → Certificados push da Web → par de chaves (VAPID). */
 self.MM_VAPID_KEY = "";
 
-/* DEV: enquanto true (ou enquanto apiKey estiver vazia), o login é ignorado.
-   Mude para false depois de configurar o Firebase. */
-self.MM_DEV_BYPASS_LOGIN = true;
+/* O login por Firebase foi substituído pelo código de acesso (js/auth.js + config.js).
+   Este arquivo fica só para as notificações (inertes enquanto apiKey estiver vazia). */
+self.MM_DEV_BYPASS_LOGIN = false; /* login agora é por código (config.js); mantido só para notificações */
