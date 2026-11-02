@@ -1,6 +1,6 @@
 /* Service worker do My Mentor — cache offline.
    Ao publicar mudanças no app (HTML/CSS/JS), aumente VERSAO para forçar atualização. */
-var VERSAO = "mymentor-v8";
+var VERSAO = "mymentor-v9";
 var NUCLEO = [
   "./", "index.html", "manifest.json", "content.json", "firebase-config.js", "config.js",
   "css/app.css", "js/app.js", "js/auth.js", "js/notificacoes.js", "js/instalar.js",
@@ -8,6 +8,7 @@ var NUCLEO = [
   "assets/fonts/Fraunces.ttf", "assets/fonts/Manrope.ttf", "assets/fonts/IBMPlexMono-Medium.ttf",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "icons/favicon-64.png",
   "contato/rafaella-coutinho.vcf",
+  "testes/romantismo.html",
   "testes/parametros.html",
   "testes/ansiedade.html",
   "testes/apego.html",

@@ -3,6 +3,17 @@
   "secoes": {
     "testes": [
       {
+        "id": "romantismo",
+        "titulo": "Qual é a sua lente?",
+        "descricao": "Descubra em qual dos 5 níveis de romantismo você está hoje: como você enxerga a mesa da vida, no amor, no trabalho, na família e no mundo. Leva uns 10 minutos.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/romantismo.html",
+        "tempo": "10 min",
+        "novo": true,
+        "publicado": "2026-11-02"
+      },
+      {
         "id": "parametros",
         "titulo": "Meus parâmetros",
         "descricao": "Olhe com honestidade para o que precisa existir, e o que não pode existir, numa relação. Leva uns 10 minutos.",
@@ -147,6 +158,16 @@
     ],
     "guias": [
       {
+        "id": "romantismo-guia",
+        "titulo": "Guia — O que é o romantismo",
+        "descricao": "A lente que distorce a forma como vemos a vida, de onde ela veio, amor × paixão e os 5 níveis explicados pela mesa de comida.",
+        "data": "2026-11-02",
+        "tipo": "pdf",
+        "arquivo": "guias/Romantismo_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-02"
+      },
+      {
         "id": "parametros-guia",
         "titulo": "Guia — Parâmetros",
         "descricao": "O que são, como definir os seus e como avaliar uma pessoa, ou uma relação, antes que o sentimento decida por você.",
@@ -194,6 +215,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "romantismo-lancamento",
+        "titulo": "Disponível: teste e guia de Romantismo",
+        "descricao": "O teste “Qual é a sua lente?” e o guia “O que é o romantismo” já estão disponíveis no app.",
+        "data": "2026-11-02",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true,
+        "publicado": "2026-11-02"
+      },
       {
         "id": "aba-precos",
         "titulo": "Nova aba: Investimento",
