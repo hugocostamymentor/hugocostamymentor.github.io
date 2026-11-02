@@ -1,0 +1,294 @@
+{
+  "atualizado": "2026-11-02",
+  "secoes": {
+    "testes": [
+      {
+        "id": "parametros",
+        "titulo": "Meus parâmetros",
+        "descricao": "Olhe com honestidade para o que precisa existir, e o que não pode existir, numa relação. Leva uns 10 minutos.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/parametros.html",
+        "novo": true
+      },
+      {
+        "id": "ansiedade",
+        "titulo": "Como anda a sua ansiedade",
+        "descricao": "Um retrato de como a tensão tem aparecido na sua mente, no seu corpo, no sono e nas suas escolhas, e do que já te ajuda a se acalmar.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/ansiedade.html",
+        "tempo": "7 min",
+        "novo": true
+      },
+      {
+        "id": "apego",
+        "titulo": "Como você se vincula",
+        "descricao": "Mostra como você costuma se aproximar, se afastar e se sentir seguro(a) nas relações próximas: medo de perder, necessidade de espaço, oscilações.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/apego.html",
+        "tempo": "7 min",
+        "novo": true
+      },
+      {
+        "id": "autoestima",
+        "titulo": "Como você se enxerga",
+        "descricao": "Um olhar sobre como você se trata por dentro: o valor que se dá, a voz crítica, a confiança no que sabe fazer e a facilidade de dizer não.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/autoestima.html",
+        "tempo": "6 min",
+        "novo": true
+      },
+      {
+        "id": "autossabotagem",
+        "titulo": "O que te trava",
+        "descricao": "Ajuda a enxergar os jeitos como você mesmo(a) acaba se atrapalhando: perfeccionismo, adiamento, desistir no meio, medo de dar certo.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/autossabotagem.html",
+        "tempo": "7 min",
+        "novo": true
+      },
+      {
+        "id": "burnout",
+        "titulo": "Como anda a sua energia no trabalho",
+        "descricao": "Mostra como o trabalho (ou a rotina de cuidado com a casa e a família) tem pesado na sua energia, no seu humor e na sua vida fora dele, e o que ainda te recarrega.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/burnout.html",
+        "tempo": "8 min",
+        "novo": true
+      },
+      {
+        "id": "ciume",
+        "titulo": "Ciúme e confiança",
+        "descricao": "Ajuda a entender como o ciúme aparece em você: o que sente, o que imagina, o que faz com isso e quanto consegue confiar.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/ciume.html",
+        "tempo": "6 min",
+        "novo": true
+      },
+      {
+        "id": "comunicacao-conflito",
+        "titulo": "Como você atravessa conflitos",
+        "descricao": "Mostra como você costuma agir numa discussão (atacar, se defender, se fechar, evitar) e o quanto consegue escutar e reparar depois.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/comunicacao-conflito.html",
+        "tempo": "7 min",
+        "novo": true
+      },
+      {
+        "id": "crencas-limitantes",
+        "titulo": "As frases que te guiam",
+        "descricao": "Ajuda a identificar as frases internas que guiam suas escolhas sem você perceber, sobre você, sobre o que merece, sobre os outros e sobre o mundo, e o quanto elas te prendem.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/crencas-limitantes.html",
+        "tempo": "6 min",
+        "novo": true
+      },
+      {
+        "id": "esquemas",
+        "titulo": "Padrões que se repetem",
+        "descricao": "Ajuda a reconhecer padrões antigos de sentir e reagir que voltam em diferentes fases da vida, nas relações, no trabalho e com você mesmo(a), e o quanto você já consegue cuidar deles.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/esquemas.html",
+        "tempo": "8 min",
+        "novo": true
+      },
+      {
+        "id": "linguagens-cuidado",
+        "titulo": "Como você sente e mostra cuidado",
+        "descricao": "Descobre o que mais te faz sentir cuidado(a) e querido(a), e como você costuma demonstrar carinho. Ajuda a entender desencontros nas relações.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/linguagens-cuidado.html",
+        "tempo": "6 min",
+        "novo": true
+      },
+      {
+        "id": "missao-proposito",
+        "titulo": "Missão e propósito",
+        "descricao": "Um retrato de quanto você tem clareza sobre seus valores, talentos e direção, e de quanto a sua vida de hoje está alinhada com o que importa para você.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/missao-proposito.html",
+        "tempo": "7 min",
+        "novo": true
+      },
+      {
+        "id": "regulacao-emocional",
+        "titulo": "Como você lida com o que sente",
+        "descricao": "Mostra como você percebe, nomeia e atravessa as suas emoções: quando elas transbordam, quando ficam engolidas e quais estratégias já te ajudam.",
+        "data": "2026-11-02",
+        "tipo": "teste",
+        "arquivo": "testes/regulacao-emocional.html",
+        "tempo": "7 min",
+        "novo": true
+      }
+    ],
+    "guias": [
+      {
+        "id": "parametros-guia",
+        "titulo": "Guia — Parâmetros",
+        "descricao": "O que são, como definir os seus e como avaliar uma pessoa, ou uma relação, antes que o sentimento decida por você.",
+        "data": "2026-11-02",
+        "tipo": "pdf",
+        "arquivo": "guias/Parametros_Guia_MyMentor.pdf",
+        "novo": true
+      }
+    ],
+    "audios": [],
+    "videos": [
+      {
+        "id": "yt-qEl2NoMdEFU",
+        "titulo": "Como ter mais força emocional",
+        "descricao": "",
+        "data": "2024-11-06",
+        "tipo": "youtube",
+        "url": "https://youtu.be/qEl2NoMdEFU",
+        "capa": "assets/thumbs/qEl2NoMdEFU.jpg",
+        "novo": true
+      },
+      {
+        "id": "yt-V0T4WCDQNic",
+        "titulo": "O que encanta a mente",
+        "descricao": "Aula de “Entre o encanto e o alerta”, curso com 5 aulas.",
+        "data": "2026-02-15",
+        "tipo": "youtube",
+        "url": "https://youtu.be/V0T4WCDQNic",
+        "capa": "assets/thumbs/V0T4WCDQNic.jpg",
+        "novo": true
+      },
+      {
+        "id": "yt-As622_zJZ94",
+        "titulo": "Lealdade e fidelidade nas relações",
+        "descricao": "Primeiro conteúdo da imersão de mês dos namorados.",
+        "data": "2025-10-23",
+        "tipo": "youtube",
+        "url": "https://youtu.be/As622_zJZ94",
+        "capa": "assets/thumbs/As622_zJZ94.jpg",
+        "novo": true
+      }
+    ],
+    "novidades": [
+      {
+        "id": "aba-precos",
+        "titulo": "Nova aba: Investimento",
+        "descricao": "Valores das consultas, dos pacotes mensais e do Acompanhamento Integral, com contato direto com a Rafaella pelo WhatsApp.",
+        "data": "2026-11-02",
+        "tipo": "aviso",
+        "url": "#/precos",
+        "novo": true
+      },
+      {
+        "id": "testes-clientes-12",
+        "titulo": "12 novos testes de autoconhecimento",
+        "descricao": "Ansiedade, vínculos, autoestima, autossabotagem, esgotamento, ciúme, conflitos, crenças, padrões, emoções, linguagens de cuidado e propósito. Cada um leva de 6 a 8 minutos e gera um resultado para levar à conversa com o Hugo.",
+        "data": "2026-11-02",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true
+      },
+      {
+        "id": "videos-youtube-1",
+        "titulo": "Novos vídeos na aba Vídeos",
+        "descricao": "Como ter mais força emocional · O que encanta a mente · Lealdade e fidelidade nas relações.",
+        "data": "2026-11-02",
+        "tipo": "aviso",
+        "url": "#/videos",
+        "novo": true
+      },
+      {
+        "id": "lancamento-app",
+        "titulo": "Disponível: teste e guia de Parâmetros",
+        "descricao": "O teste de Parâmetros e o guia de leitura já estão disponíveis no app.",
+        "data": "2026-11-02",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true
+      }
+    ]
+  },
+  "precos": {
+    "contato": {
+      "nome": "Rafaella Coutinho",
+      "papel": "Sócia · atendimento",
+      "whatsapp": "https://api.whatsapp.com/send?phone=5531984239778",
+      "tel": "+5531984239778",
+      "exibir": "(31) 98423-9778",
+      "vcf": "contato/rafaella-coutinho.vcf"
+    },
+    "integral": {
+      "rotulo": "Acompanhamento Integral",
+      "titulo": "Para pessoas notáveis",
+      "texto": "Um acompanhamento próximo, para quem já superou a média e quer romper os ciclos emocionais que ainda travam.",
+      "inclui": [
+        "Acesso direto ao WhatsApp pessoal do Hugo, com suporte em tempo real",
+        "Sessões personalizadas, profundas e estratégicas",
+        "Áudios, vídeos e exercícios que sustentam a sua evolução",
+        "Disponibilidade para momentos decisivos",
+        "Escolha prioritária de horário e maior janela de atendimentos"
+      ],
+      "planos": [
+        {
+          "periodo": "1 mês",
+          "nome": "Plano Foco",
+          "valor": "R$ 15 mil",
+          "itens": [
+            "4 consultas de até 1h30min de duração",
+            "Acesso ilimitado ao contato pessoal do Hugo Costa por 1 mês",
+            "Material em áudio, vídeo e PDF"
+          ]
+        },
+        {
+          "periodo": "6 meses",
+          "nome": "Plano Transformação Total",
+          "valor": "R$ 60 mil",
+          "itens": [
+            "24 consultas de até 1h30min de duração",
+            "Acesso ilimitado ao contato pessoal do Hugo Costa por 6 meses",
+            "Material em áudio, vídeo e PDF"
+          ],
+          "nota": "Desconto total de R$ 30 mil em comparação ao Plano Foco"
+        }
+      ],
+      "fecho": "Não é para todos. É para quem já entendeu que chegou a hora de viver sem amarras emocionais e com clareza plena sobre quem é."
+    },
+    "sessoes": {
+      "titulo": "Alta Psicanálise Estratégica",
+      "subtitulo": "Sessões individuais de até 45 minutos",
+      "planos": [
+        {
+          "nome": "Consulta Avulsa",
+          "valor": "R$ 480",
+          "detalhe": "Sessão única"
+        },
+        {
+          "nome": "Consulta Semanal",
+          "periodo": "1 mês",
+          "valor": "R$ 1.700",
+          "detalhe": "4 sessões · 1 por semana",
+          "economia": "Você economizará R$ 220"
+        },
+        {
+          "nome": "Dois Encontros Semanais",
+          "periodo": "1 mês",
+          "valor": "R$ 3.320",
+          "detalhe": "8 sessões · 2 por semana",
+          "economia": "Você economizará R$ 520"
+        }
+      ],
+      "notas": [
+        "Os pacotes são pensados para 1 mês.",
+        "Quer um pacote personalizado? Fale conosco pelo WhatsApp."
+      ]
+    },
+    "pagamento": "Pix, transferência ou cartão de crédito em até 12x (com juros)."
+  }
+}

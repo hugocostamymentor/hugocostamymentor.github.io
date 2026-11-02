@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My Mentor</title>
+<meta name="description" content="Área do cliente — psicanálise e mentoria de Hugo Costa.">
+<meta name="theme-color" content="#17140F">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="My Mentor">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<!-- Tela de login -->
+<section id="tela-login" class="login oculto" aria-label="Entrar">
+  <img src="assets/img/logo_principal_fundo-escuro.png" alt="My Mentor — Sua força &amp; evolução">
+  <p class="rotulo">Área do cliente</p>
+  <h1>Entrar</h1>
+  <form id="form-login" novalidate>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" autocomplete="email" inputmode="email" required>
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" autocomplete="current-password" required>
+    <p class="erro" id="login-erro" role="alert"></p>
+    <button class="btn primario bloco" type="submit">Entrar</button>
+  </form>
+  <p style="text-align:center;margin-top:16px"><button class="link" id="esqueci" type="button">Esqueci minha senha</button></p>
+  <p class="sec" style="font-size:.85rem;text-align:center">O acesso é liberado por nós para clientes em acompanhamento.</p>
+  <p class="aviso-dev oculto" id="aviso-dev">Modo de desenvolvimento: Firebase não configurado</p>
+</section>
+
+<!-- App -->
+<div id="tela-app" class="oculto">
+  <header class="topo">
+    <img src="assets/img/logo_sem-tagline_fundo-escuro.png" alt="My Mentor">
+    <button id="sair" type="button">Sair</button>
+  </header>
+  <main id="conteudo" tabindex="-1"></main>
+  <nav class="tabs" aria-label="Navegação principal">
+    <a href="#/inicio" data-tab="inicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg>Início</a>
+    <a href="#/testes" data-tab="testes"><svg viewBox="0 0 24 24"><path d="M9 4h6M8 4h8v16H8z"/><path d="M11 9h3M11 13h3M11 17h3"/></svg>Testes</a>
+    <a href="#/guias" data-tab="guias"><svg viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/><path d="M12 6v14"/></svg>Guias</a>
+    <a href="#/audios" data-tab="audios"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0116 0v2"/><path d="M4 14h3v6H4zM17 14h3v6h-3z"/></svg>Áudios</a>
+    <a href="#/videos" data-tab="videos"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12"/><path d="M16 10l5-3v10l-5-3z"/></svg>Vídeos</a>
+    <a href="#/precos" data-tab="precos"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M16 7c-1-1-2.3-1.5-4-1.5-2.2 0-4 1.1-4 3s1.8 2.5 4 3 4 1.1 4 3-1.8 3-4 3c-1.8 0-3.2-.6-4.2-1.7"/></svg>Preços</a>
+    <a href="#/novidades" data-tab="novidades"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/></svg>Novidades</a>
+  </nav>
+  <a class="wa-flutuante" id="wa-flutuante" href="https://api.whatsapp.com/send?phone=5531984239778" target="_blank" rel="noopener" aria-label="Falar com a Rafaella no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8a5 5 0 0 1-2.2-2.2l.8-1-1-2z"/></svg></a>
+  <div class="toast oculto" id="toast" role="status"></div>
+</div>
+
+<!-- Banner de instalação -->
+<aside id="banner-instalar" class="instalar oculto" role="dialog" aria-label="Instalar o app">
+  <button class="fechar" id="instalar-fechar" aria-label="Fechar">×</button>
+  <h3>Instale o My Mentor</h3>
+  <p id="instalar-texto"></p>
+  <div class="acoes">
+    <button class="btn primario oculto" id="instalar-botao" type="button">Instalar</button>
+    <button class="btn" id="instalar-depois" type="button">Agora não</button>
+  </div>
+</aside>
+
+<script src="firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notificacoes.js"></script>
+<script src="js/instalar.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
