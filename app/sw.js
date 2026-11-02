@@ -1,6 +1,6 @@
 /* Service worker do My Mentor — cache offline.
    Ao publicar mudanças no app (HTML/CSS/JS), aumente VERSAO para forçar atualização. */
-var VERSAO = "mymentor-v7";
+var VERSAO = "mymentor-v8";
 var NUCLEO = [
   "./", "index.html", "manifest.json", "content.json", "firebase-config.js", "config.js",
   "css/app.css", "js/app.js", "js/auth.js", "js/notificacoes.js", "js/instalar.js",

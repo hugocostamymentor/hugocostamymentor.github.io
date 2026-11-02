@@ -9,7 +9,8 @@
         "data": "2026-11-02",
         "tipo": "teste",
         "arquivo": "testes/parametros.html",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "ansiedade",
@@ -19,7 +20,8 @@
         "tipo": "teste",
         "arquivo": "testes/ansiedade.html",
         "tempo": "7 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "apego",
@@ -29,7 +31,8 @@
         "tipo": "teste",
         "arquivo": "testes/apego.html",
         "tempo": "7 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "autoestima",
@@ -39,7 +42,8 @@
         "tipo": "teste",
         "arquivo": "testes/autoestima.html",
         "tempo": "6 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "autossabotagem",
@@ -49,7 +53,8 @@
         "tipo": "teste",
         "arquivo": "testes/autossabotagem.html",
         "tempo": "7 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "burnout",
@@ -59,7 +64,8 @@
         "tipo": "teste",
         "arquivo": "testes/burnout.html",
         "tempo": "8 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "ciume",
@@ -69,7 +75,8 @@
         "tipo": "teste",
         "arquivo": "testes/ciume.html",
         "tempo": "6 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "comunicacao-conflito",
@@ -79,7 +86,8 @@
         "tipo": "teste",
         "arquivo": "testes/comunicacao-conflito.html",
         "tempo": "7 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "crencas-limitantes",
@@ -89,7 +97,8 @@
         "tipo": "teste",
         "arquivo": "testes/crencas-limitantes.html",
         "tempo": "6 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "esquemas",
@@ -99,7 +108,8 @@
         "tipo": "teste",
         "arquivo": "testes/esquemas.html",
         "tempo": "8 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "linguagens-cuidado",
@@ -109,7 +119,8 @@
         "tipo": "teste",
         "arquivo": "testes/linguagens-cuidado.html",
         "tempo": "6 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "missao-proposito",
@@ -119,7 +130,8 @@
         "tipo": "teste",
         "arquivo": "testes/missao-proposito.html",
         "tempo": "7 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "regulacao-emocional",
@@ -129,7 +141,8 @@
         "tipo": "teste",
         "arquivo": "testes/regulacao-emocional.html",
         "tempo": "7 min",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       }
     ],
     "guias": [
@@ -140,7 +153,8 @@
         "data": "2026-11-02",
         "tipo": "pdf",
         "arquivo": "guias/Parametros_Guia_MyMentor.pdf",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       }
     ],
     "audios": [],
@@ -153,7 +167,8 @@
         "tipo": "youtube",
         "url": "https://youtu.be/qEl2NoMdEFU",
         "capa": "assets/thumbs/qEl2NoMdEFU.jpg",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "yt-V0T4WCDQNic",
@@ -163,7 +178,8 @@
         "tipo": "youtube",
         "url": "https://youtu.be/V0T4WCDQNic",
         "capa": "assets/thumbs/V0T4WCDQNic.jpg",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "yt-As622_zJZ94",
@@ -173,7 +189,8 @@
         "tipo": "youtube",
         "url": "https://youtu.be/As622_zJZ94",
         "capa": "assets/thumbs/As622_zJZ94.jpg",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       }
     ],
     "novidades": [
@@ -184,7 +201,8 @@
         "data": "2026-11-02",
         "tipo": "aviso",
         "url": "#/precos",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "testes-clientes-12",
@@ -193,7 +211,8 @@
         "data": "2026-11-02",
         "tipo": "aviso",
         "url": "#/testes",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "videos-youtube-1",
@@ -202,7 +221,8 @@
         "data": "2026-11-02",
         "tipo": "aviso",
         "url": "#/videos",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       },
       {
         "id": "lancamento-app",
@@ -211,7 +231,8 @@
         "data": "2026-11-02",
         "tipo": "aviso",
         "url": "#/testes",
-        "novo": true
+        "novo": true,
+        "publicado": "2026-11-02"
       }
     ]
   },
