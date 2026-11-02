@@ -196,30 +196,45 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     var forcarLogin = /[?&]login\b/.test(location.search); /* ?login mostra a tela de login (útil para testes) */
-    if (MMAuth.modoDev) $("aviso-dev").classList.remove("oculto");
+    if (!MMAuth.servidorConfigurado) $("aviso-dev").classList.remove("oculto");
+    if (MMAuth.motivo) $("login-erro").textContent = MMAuth.motivo;
+    function linkPedido() {
+      var nome = $("nome-pedido").value.trim();
+      var msg = "Olá! Gostaria de pedir acesso ao app My Mentor." + (nome ? " Meu nome é " + nome + "." : "");
+      $("pedir-acesso").href = "https://api.whatsapp.com/send?phone=" + (self.MM_WHATSAPP || "5531984239778") + "&text=" + encodeURIComponent(msg);
+    }
+    $("nome-pedido").oninput = linkPedido; linkPedido();
     $("form-login").onsubmit = function (e) {
       e.preventDefault(); $("login-erro").textContent = "";
-      var email = $("email").value.trim(), senha = $("senha").value;
-      if (!email || !senha) { $("login-erro").textContent = "Preencha e-mail e senha."; return; }
-      MMAuth.entrar(email, senha).then(function () { if (MMAuth.modoDev) mostrarApp(); })
-        .catch(function (err) { $("login-erro").textContent = err.message; });
+      var codigo = $("codigo").value.trim();
+      if (!codigo) { $("login-erro").textContent = "Digite o código que você recebeu."; return; }
+      $("btn-codigo").disabled = true;
+      MMAuth.entrar(codigo).catch(function (err) { $("login-erro").textContent = err.message; })
+        .then(function () { $("btn-codigo").disabled = false; });
     };
-    $("esqueci").onclick = function () {
-      var email = $("email").value.trim();
-      if (!email) { $("login-erro").textContent = "Digite seu e-mail acima para receber o link de redefinição."; return; }
-      MMAuth.redefinirSenha(email).then(function () { $("login-erro").textContent = "Se o e-mail estiver cadastrado, você receberá um link para criar uma nova senha."; })
-        .catch(function (err) { $("login-erro").textContent = err.message; });
-    };
-    $("sair").onclick = function () { MMAuth.sair(); };
+    $("sair").onclick = function () { if (confirm("Sair deste aparelho? Para entrar de novo será preciso um novo código.")) MMAuth.sair(); };
     window.addEventListener("hashchange", rotear);
     if (forcarLogin) { mostrarLogin(); return; }
-    MMAuth.observar(function (u) { if (u) mostrarApp(); else mostrarLogin(); });
+    MMAuth.observar(function (u) { if (u) mostrarApp(); else { if (MMAuth.motivo) $("login-erro").textContent = MMAuth.motivo; mostrarLogin(); } });
   });
 
   if ("serviceWorker" in navigator) {
+    /* Atualização automática: ao abrir/voltar ao app procura sw.js novo; quando o novo assume, recarrega uma vez. */
+    var tinhaControle = !!navigator.serviceWorker.controller, recarregou = false;
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      if (!tinhaControle) { tinhaControle = true; return; } /* primeira instalação: não recarrega */
+      if (recarregou) return;
+      recarregou = true;
+      window.location.reload();
+    });
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js", { scope: "./" }).then(function (r) { self.MMSW = r; })
-        .catch(function (e) { console.error("Service worker não registrado:", e); });
+      navigator.serviceWorker.register("sw.js", { scope: "./", updateViaCache: "none" }).then(function (r) {
+        self.MMSW = r;
+        r.update().catch(function () {});
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "visible") r.update().catch(function () {});
+        });
+      }).catch(function (e) { console.error("Service worker não registrado:", e); });
     });
   }
 })();
