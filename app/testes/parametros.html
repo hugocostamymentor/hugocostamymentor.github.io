@@ -89,7 +89,7 @@ function qHTML(q){let v=S.a[q.id],h=`<div class="card"><h3>${q.t}</h3>`;
 function listHTML(key,sug,title,ph){const sel=S[key];const all=[...new Set([...sug,...sel])];
  return `<div class="card"><div class="lab">${key=="q"?"Lista 1":"Lista 2"}</div><h3>${title}</h3><div class="chips">${all.map(o=>`<span class="chip ${sel.includes(o)?"on":""}" data-l="${key}" data-i="${esc(o)}">${esc(o)}</span>`).join("")}</div>
  <div class="add"><input type="text" id="add_${key}" placeholder="${ph}" maxlength="80"><button class="btn sec" data-add="${key}">Adicionar</button></div></div>`}
-function render(){window.scrollTo(0,0);const nav=document.getElementById("nav"),nx=document.getElementById("nx"),bk=document.getElementById("bk");nav.classList.remove("hide");bk.style.visibility=step<0?"hidden":"visible";nx.textContent="Continuar";
+function render(){window.scrollTo(0,0);setTimeout(sv,0);const nav=document.getElementById("nav"),nx=document.getElementById("nx"),bk=document.getElementById("bk");nav.classList.remove("hide");bk.style.visibility=step<0?"hidden":"visible";nx.textContent="Continuar";
  if(step<0){app.innerHTML=`<header><img src="${LOGO}" alt="My Mentor"></header><div class="lab" style="text-align:center">Reflexão guiada · Hugo Costa</div><h1 style="text-align:center">Meus parâmetros</h1>
  <p>Este é um momento para você olhar com honestidade para o que precisa existir, e o que não pode existir, numa relação. Leva uns 10 minutos.</p>
  <div class="card"><h3>Como você se chama?</h3><input type="text" id="nome" value="${esc(S.nome)}" placeholder="Seu nome" autocomplete="given-name"><div id="ne" class="err"></div></div>
@@ -158,7 +158,7 @@ function result(){const c=compute();window._c=c;document.getElementById("nav").c
  <div class="card dark"><div class="lab">Direcionamento</div>${guide(c).map(x=>`<p class="flag">${x}</p>`).join("")}</div>
  <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px"><button class="btn" id="dl">Baixar resultado</button><button class="btn sec" id="cp">Copiar resumo para o Hugo</button><button class="btn ghost" id="rs">Refazer</button></div>
  <p class="note">Ferramenta reflexiva autoral, não é um instrumento psicométrico validado. Nada foi enviado: tudo ficou neste aparelho.</p>`;
- document.getElementById("dl").onclick=download;document.getElementById("cp").onclick=copy;document.getElementById("rs").onclick=()=>{if(confirm("Apagar respostas e recomeçar?"))location.reload()}}
+ document.getElementById("dl").onclick=download;document.getElementById("cp").onclick=copy;document.getElementById("rs").onclick=()=>{if(confirm("Apagar respostas e recomeçar?")){_rst=true;clr();location.reload()}}}
 function summary(){const c=window._c,r=c.r;let t=`Olá, Hugo! Segue meu resultado do teste de Parâmetros.\n\nNome: ${S.nome}\nData: ${dateBR()}\n\nPONTUAÇÕES (0-100)\n`;
  DIM.forEach(([k,n])=>{if(k!="relacao"||c.inRel)t+=`- ${n}: ${r[k]??"-"} (${lvl(r[k])})\n`});
  t+=`\nQUALIDADES ESSENCIAIS\n${par("q").map(x=>"- "+x).join("\n")||"- (nenhuma)"}\n\nDEFEITOS INADMISSÍVEIS\n${par("d").map(x=>"- "+x).join("\n")||"- (nenhum)"}\n`;
@@ -189,7 +189,15 @@ async function download(){const c=window._c,W=1080,P=70;const cv=document.create
  if(file&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:"Meu resultado"});return}catch(e){if(e.name=="AbortError")return}}
  try{const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove()}catch(e){}
  ov(`<h3>Seu resultado</h3><p class="note">Se o download não começou (comum dentro do Telegram), toque e segure na imagem e escolha “Salvar imagem”, ou abra esta página no navegador do celular. Também dá para salvar em PDF:</p><img src="${url}" alt="Resultado"><p><button class="btn ghost" onclick="window.print()">Imprimir / salvar PDF</button></p>`)}
-render();
+/* Persistência: salva o progresso neste aparelho para não perder ao minimizar o app. */
+const SK="mm_teste_parametros",SMAX=7*864e5;let _sy=0,_rst=false;
+function sv(){if(_rst)return;try{localStorage.setItem(SK,JSON.stringify({t:Date.now(),step:step,S:S,y:window.scrollY}))}catch(e){}}
+function clr(){try{localStorage.removeItem(SK)}catch(e){}}
+(function(){try{const d=JSON.parse(localStorage.getItem(SK)||"null");if(!d)return;if(!d.t||Date.now()-d.t>SMAX){clr();return}
+ if(d.S)Object.assign(S,d.S);if(typeof d.step=="number")step=Math.max(-1,Math.min(d.step,SEC.length));_sy=d.y||0}catch(e){clr()}})();
+app.addEventListener("input",sv);app.addEventListener("change",sv);
+addEventListener("pagehide",sv);document.addEventListener("visibilitychange",()=>{if(document.visibilityState=="hidden")sv()});
+render();if(_sy)setTimeout(()=>window.scrollTo(0,_sy),0);
 </script>
 <style media="print">.nav,#ov,.btn{display:none!important}body{background:#fff}</style>
 </body></html>
