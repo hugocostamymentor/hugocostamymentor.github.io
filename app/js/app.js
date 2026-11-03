@@ -179,6 +179,7 @@
     if (!conteudo) return;
     var partes = (location.hash.replace(/^#\/?/, "") || "inicio").split("/").map(decodeURIComponent);
     var aba = partes[0], html;
+    try { localStorage.setItem("mm_rota", JSON.stringify({ h: location.hash, t: Date.now() })); } catch (e) {}
     document.querySelectorAll("audio").forEach(function (a) { a.pause(); });
     document.querySelectorAll(".player[data-src]").forEach(function (p) { p._audio && p._audio.pause(); });
     if (aba === "abrir") { html = telaAbrir(partes[1], partes[2]); aba = partes[1]; }
@@ -221,6 +222,13 @@
     $("sair").classList.toggle("oculto", MMAuth.modoDev);
     if (!conteudo) carregarConteudo(); else rotear();
   }
+
+  /* Se o sistema fechou o app em segundo plano (ex.: ao minimizar), volta para a mesma tela (até 12 h). */
+  try {
+    var rota = JSON.parse(localStorage.getItem("mm_rota") || "null");
+    if (!location.hash && rota && rota.h && rota.h.indexOf("#/abrir/") === 0 && Date.now() - rota.t < 12 * 3600e3)
+      history.replaceState(null, "", location.pathname + location.search + rota.h);
+  } catch (e) {}
 
   document.addEventListener("DOMContentLoaded", function () {
     var forcarLogin = /[?&]login\b/.test(location.search); /* ?login mostra a tela de login (útil para testes) */
