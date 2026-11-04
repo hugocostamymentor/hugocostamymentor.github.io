@@ -42,6 +42,10 @@ input:focus,select:focus{outline:none;border-color:var(--champ)}
 .st{font:500 .62rem var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--pedra);color:var(--pedra);white-space:nowrap}
 .st.ativo{border-color:var(--champ);color:var(--champ)}.st.pend{border-color:var(--bronze);color:var(--osso)}.st.bloq{border-color:var(--oxido);background:var(--oxido);color:var(--osso)}
 .topo-lista{display:flex;justify-content:space-between;align-items:baseline}
+.lixo{background:none;border:1px solid rgba(140,133,122,.5);color:var(--champ,#C8A46A);width:34px;height:34px;padding:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.lixo:hover{border-color:#C8A46A}.lixo svg{width:16px;height:16px}
+.lixo:disabled{opacity:.4}
+.btns{display:flex;gap:8px;align-items:center}
 .link{background:none;border:0;color:var(--bronze);font:500 .68rem var(--mono);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;padding:0}
 @media (max-width:480px){.acoes{grid-template-columns:1fr}.linha{flex-wrap:wrap}}
 </style>
@@ -89,7 +93,7 @@ input:focus,select:focus{outline:none;border-color:var(--champ)}
       </div>
     </div>
 
-    <div class="topo-lista"><h2>Códigos e aparelhos</h2><button class="link" id="atualizar" type="button">Atualizar</button></div>
+    <div class="topo-lista"><h2>Códigos e aparelhos</h2><span class="btns"><button class="link oculto" id="limpar" type="button">Limpar expirados/bloqueados</button><button class="link" id="atualizar" type="button">Atualizar</button></span></div>
     <p class="erro" id="erro-lista"></p>
     <div id="lista"></div>
   </section>
@@ -101,7 +105,8 @@ input:focus,select:focus{outline:none;border-color:var(--champ)}
   var LINK_APP = "https://hugocostamymentor.github.io/app/";
   var K = "mm_admin_sessao";
   var $ = function (id) { return document.getElementById(id); };
-  var sessao = null;
+  var sessao = null, removiveis = [];
+  var LIXO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';
   try { sessao = JSON.parse(sessionStorage.getItem(K) || "null"); } catch (e) {}
   if (sessao && sessao.expira < Date.now()) sessao = null;
 
@@ -165,6 +170,8 @@ input:focus,select:focus{outline:none;border-color:var(--champ)}
   function carregar() {
     $("erro-lista").textContent = "";
     api("GET", "/admin/codes").then(function (j) {
+      removiveis = [];
+      $("limpar").classList.add("oculto");
       if (!j.codigos.length) { $("lista").innerHTML = '<p class="sec">Nenhum código gerado ainda.</p>'; return; }
       $("lista").innerHTML = j.codigos.map(function (c) {
         var st, cls;
@@ -175,11 +182,24 @@ input:focus,select:focus{outline:none;border-color:var(--champ)}
         var meta = esc(c.codigo) + " · criado " + data(c.criadoEm) +
           (c.usado ? " · ativado " + data(c.usadoEm) + " · aparelho " + esc(String(c.deviceId).slice(0, 8)) : " · expira " + data(c.expira));
         var botao = c.revogado ? "" : '<button class="btn perigo" data-codigo="' + esc(c.codigo) + '" data-nome="' + esc(c.nome) + '">Bloquear</button>';
+        if (c.revogado || cls === "") { removiveis.push(c.codigo); botao = '<button class="lixo" type="button" title="Excluir do histórico" aria-label="Excluir ' + esc(c.nome) + ' do histórico" data-excluir="' + esc(c.codigo) + '" data-nome="' + esc(c.nome) + '">' + LIXO + '</button>'; }
         return '<div class="linha"><div><b>' + esc(c.nome) + '</b> <span class="st ' + cls + '">' + st + '</span><div class="meta">' + meta + '</div></div>' + botao + '</div>';
       }).join("");
+      $("limpar").classList.toggle("oculto", !removiveis.length);
     }).catch(function (err) { $("erro-lista").textContent = err.message; });
   }
+  function excluir(codigos, b) {
+    if (b) b.disabled = true;
+    return api("POST", "/admin/delete", { codes: codigos }).then(carregar).catch(function (err) { $("erro-lista").textContent = err.message; if (b) b.disabled = false; });
+  }
+  $("limpar").onclick = function () {
+    if (!removiveis.length) return;
+    if (!confirm("Excluir " + removiveis.length + " item(ns) expirado(s)/bloqueado(s) do histórico? Quem está bloqueado continua bloqueado.")) return;
+    excluir(removiveis.slice(), $("limpar"));
+  };
   $("lista").onclick = function (e) {
+    var x = e.target.closest("button[data-excluir]");
+    if (x) { if (confirm("Excluir " + x.dataset.nome + " do histórico? (Não reativa o acesso.)")) excluir([x.dataset.excluir], x); return; }
     var b = e.target.closest("button[data-codigo]"); if (!b) return;
     if (!confirm("Bloquear o acesso de " + b.dataset.nome + "? O app deixará de abrir no aparelho dele(a).")) return;
     b.disabled = true;
