@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-11-02",
+  "atualizado": "2026-11-05",
   "secoes": {
     "testes": [
       {
@@ -157,6 +157,16 @@
       }
     ],
     "guias": [
+      {
+        "id": "posicionamento-guia",
+        "titulo": "Guia — Posicionamento",
+        "descricao": "Da compreensão à aplicação: o que é, quando usar, passivo × ativo, estrutura, palavra com poder, cenários (casal, família, trabalho, amizades) e os autoenganos do “já me posicionei”.",
+        "data": "2026-11-05",
+        "tipo": "pdf",
+        "arquivo": "guias/Posicionamento_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-05"
+      },
       {
         "id": "romantismo-guia",
         "titulo": "Guia — O que é o romantismo",
