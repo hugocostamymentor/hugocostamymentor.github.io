@@ -44,9 +44,53 @@
   function card(i, secao) {
     var href = destino(i), extra = "";
     if (i.tipo === "teste") href = "#/abrir/" + encodeURIComponent(secao) + "/" + encodeURIComponent(i.id);
-    else if (i.tipo === "pdf" || i.tipo === "link") extra = ' target="_blank" rel="noopener"';
+    else if (i.tipo === "pdf") extra = ' data-pdf="true" data-titulo="' + esc(i.titulo) + '"';
+    else if (i.tipo === "link") extra = ' target="_blank" rel="noopener"';
     return '<a class="card" data-nid="' + esc(nid(i)) + '" href="' + esc(href) + '"' + extra + ">" + meta(i) + "<h3>" + esc(i.titulo) + "</h3><p>" + esc(i.descricao) + "</p></a>";
   }
+
+  /* Native PDF navigation traps some standalone PWAs; keep the app alive. */
+  var pdfOverlay = null, pdfFocus = null, pdfOverflow = "";
+  function removerPDF() {
+    if (!pdfOverlay) return;
+    pdfOverlay.remove(); pdfOverlay = null;
+    $("tela-app").inert = false;
+    document.body.style.overflow = pdfOverflow;
+    if (pdfFocus && pdfFocus.isConnected) pdfFocus.focus();
+  }
+  function fecharPDF() {
+    if (history.state && history.state.mmPDF) history.back();
+    else removerPDF();
+  }
+  function abrirPDF(url, titulo, registrar) {
+    removerPDF();
+    pdfFocus = document.activeElement; pdfOverflow = document.body.style.overflow;
+    pdfOverlay = document.createElement("section");
+    pdfOverlay.className = "pdf-overlay";
+    pdfOverlay.setAttribute("role", "dialog");
+    pdfOverlay.setAttribute("aria-modal", "true");
+    pdfOverlay.setAttribute("aria-label", titulo);
+    pdfOverlay.innerHTML = '<header class="pdf-bar"><button type="button" class="pdf-close">× Fechar</button><span class="pdf-title">' + esc(titulo) + '</span></header>' +
+      '<div class="pdf-help">Se o PDF não aparecer completo, <a target="_blank" rel="noopener" href="' + esc(url) + '">abrir no navegador</a>.</div><div class="pdf-body"><iframe title="' + esc(titulo) + '" src="' + esc(url) + '"></iframe></div>';
+    document.body.appendChild(pdfOverlay);
+    $("tela-app").inert = true; document.body.style.overflow = "hidden";
+    pdfOverlay.querySelector("button").onclick = fecharPDF;
+    pdfOverlay.querySelector("button").focus();
+    if (registrar) history.pushState({ mmPDF: true, url: url, titulo: titulo }, "", location.href);
+  }
+  window.addEventListener("popstate", function (e) {
+    if (e.state && e.state.mmPDF) abrirPDF(e.state.url, e.state.titulo, false);
+    else removerPDF();
+  });
+  window.addEventListener("hashchange", removerPDF);
+  document.addEventListener("keydown", function (e) {
+    if (pdfOverlay && e.key === "Escape") { e.preventDefault(); fecharPDF(); }
+  });
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[data-pdf]");
+    if (!a || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault(); abrirPDF(a.href, a.dataset.titulo || "Guia em PDF", true);
+  });
 
   /* Componente de áudio com controles próprios */
   function audio(i) {
@@ -212,7 +256,8 @@
 
   function carregarConteudo() {
     return fetch("content.json", { cache: "no-cache" }).then(function (r) { return r.json(); })
-      .then(function (c) { conteudo = c; ligarVistos(); rotear(); })
+      .then(function (c) { conteudo = c; ligarVistos(); rotear();
+        if (history.state && history.state.mmPDF) abrirPDF(history.state.url, history.state.titulo, false); })
       .catch(function () { $("conteudo").innerHTML = '<h1>Sem conexão</h1><p class="sec">Não foi possível carregar o conteúdo. Tente de novo quando estiver online.</p>'; });
   }
 
