@@ -50,9 +50,15 @@
   }
 
   /* Native PDF navigation traps some standalone PWAs; keep the app alive. */
-  var pdfOverlay = null, pdfFocus = null, pdfOverflow = "";
+  var pdfOverlay = null, pdfFocus = null, pdfOverflow = "", pdfSession = null;
   function removerPDF() {
     if (!pdfOverlay) return;
+    if (pdfSession) {
+      pdfSession.closed = true;
+      if (pdfSession.observer) pdfSession.observer.disconnect();
+      if (pdfSession.task) pdfSession.task.destroy().catch(function () {});
+      pdfSession = null;
+    }
     pdfOverlay.remove(); pdfOverlay = null;
     $("tela-app").inert = false;
     document.body.style.overflow = pdfOverflow;
@@ -71,13 +77,88 @@
     pdfOverlay.setAttribute("aria-modal", "true");
     pdfOverlay.setAttribute("aria-label", titulo);
     pdfOverlay.innerHTML = '<header class="pdf-bar"><button type="button" class="pdf-close">× Fechar</button><span class="pdf-title">' + esc(titulo) + '</span></header>' +
-      '<div class="pdf-help">Se o PDF não aparecer completo, <a target="_blank" rel="noopener" href="' + esc(url) + '">abrir no navegador</a>.</div><div class="pdf-body"><iframe title="' + esc(titulo) + '" src="' + esc(url) + '"></iframe></div>';
+      '<div class="pdf-status" role="status">Carregando PDF…</div><div class="pdf-body" tabindex="0" aria-label="Páginas do PDF"></div>';
     document.body.appendChild(pdfOverlay);
     $("tela-app").inert = true; document.body.style.overflow = "hidden";
     pdfOverlay.querySelector("button").onclick = fecharPDF;
     pdfOverlay.querySelector("button").focus();
+    renderizarPDF(url, pdfOverlay);
     if (registrar) history.pushState({ mmPDF: true, url: url, titulo: titulo }, "", location.href);
   }
+  /* Render locally: mobile native PDF iframes often show only the first page. */
+  function renderizarPDF(url, overlay) {
+    var session = { closed: false, task: null, observer: null };
+    pdfSession = session;
+    var body = overlay.querySelector(".pdf-body"), status = overlay.querySelector(".pdf-status");
+    function erro(err) {
+      if (session.closed) return;
+      status.textContent = "Não foi possível exibir o PDF. ";
+      var retry = document.createElement("button");
+      retry.type = "button"; retry.textContent = "Tentar novamente";
+      retry.onclick = function () {
+        if (session.observer) session.observer.disconnect();
+        session.closed = true;
+        if (session.task) session.task.destroy().catch(function () {});
+        body.textContent = ""; status.textContent = "Carregando PDF…";
+        renderizarPDF(url, overlay);
+      };
+      status.appendChild(retry);
+      console.error("PDF:", err);
+    }
+    import("../vendor/pdfjs/pdf.min.mjs").then(async function (pdfjs) {
+      if (session.closed) return;
+      var base = new URL("vendor/pdfjs/", document.baseURI).href;
+      pdfjs.GlobalWorkerOptions.workerSrc = base + "pdf.worker.min.mjs";
+      session.task = pdfjs.getDocument({ url: url, cMapUrl: base + "cmaps/", cMapPacked: true,
+        standardFontDataUrl: base + "standard_fonts/", wasmUrl: base + "wasm/", isEvalSupported: false });
+      var doc = await session.task.promise;
+      if (session.closed) return;
+      var first = await doc.getPage(1), initial = first.getViewport({ scale: 1 });
+      status.textContent = doc.numPages + (doc.numPages === 1 ? " página" : " páginas");
+      var queue = [], busy = false;
+      async function processar() {
+        if (busy || session.closed) return;
+        busy = true;
+        try {
+          while (queue.length && !session.closed) {
+            var slot = queue.shift();
+            var page = await doc.getPage(Number(slot.dataset.page));
+            if (session.closed) break;
+            var viewport = page.getViewport({ scale: 1 });
+            var width = slot.clientWidth;
+            var fit = width / viewport.width;
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var view = page.getViewport({ scale: fit * dpr });
+            var canvas = document.createElement("canvas");
+            canvas.width = Math.ceil(view.width); canvas.height = Math.ceil(view.height);
+            canvas.setAttribute("role", "img"); canvas.setAttribute("aria-label", "Página " + slot.dataset.page);
+            slot.style.aspectRatio = viewport.width + " / " + viewport.height;
+            await page.render({ canvasContext: canvas.getContext("2d"), viewport: view }).promise;
+            if (session.closed) { canvas.width = 0; break; }
+            slot.textContent = ""; slot.appendChild(canvas); slot.dataset.rendered = "true";
+            page.cleanup();
+          }
+        } catch (err) { erro(err); }
+        busy = false;
+      }
+      session.observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !entry.target.dataset.queued) {
+            entry.target.dataset.queued = "true"; queue.push(entry.target);
+            session.observer.unobserve(entry.target);
+          }
+        });
+        processar();
+      }, { root: body, rootMargin: "700px 0px" });
+      for (var n = 1; n <= doc.numPages; n++) {
+        var slot = document.createElement("div");
+        slot.className = "pdf-page"; slot.dataset.page = n;
+        slot.style.aspectRatio = initial.width + " / " + initial.height;
+        slot.textContent = "Página " + n; body.appendChild(slot); session.observer.observe(slot);
+      }
+    }).catch(erro);
+  }
+
   window.addEventListener("popstate", function (e) {
     if (e.state && e.state.mmPDF) abrirPDF(e.state.url, e.state.titulo, false);
     else removerPDF();
