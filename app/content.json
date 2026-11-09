@@ -228,6 +228,18 @@
         "publicado": "2026-11-02"
       }
     ],
+    "jogos": [
+      {
+        "id": "entre-nos-jogo",
+        "titulo": "Entre Nós",
+        "descricao": "Um jogo de escolhas sobre relacionamentos. Você vive cenas comuns de uma relação, escolhe como reagir e, no fim, recebe um retrato do que suas escolhas protegeram e do que elas custaram. O progresso fica salvo neste aparelho.",
+        "data": "2026-11-09",
+        "tipo": "jogo",
+        "arquivo": "jogos/jogo_relacionamentos.html",
+        "novo": true,
+        "publicado": "2026-11-09"
+      }
+    ],
     "audios": [],
     "videos": [
       {
