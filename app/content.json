@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-11-05",
+  "atualizado": "2026-11-09",
   "secoes": {
     "testes": [
       {
@@ -158,8 +158,48 @@
     ],
     "guias": [
       {
+        "id": "forca-emocional-guia",
+        "titulo": "Guia: Força emocional",
+        "descricao": "Observar o pensamento, entender por que uma crítica dói, sentir a emoção no corpo e escolher a ação apesar dela. Inclui inteligência emocional e o “Eu não sou uma máquina”.",
+        "data": "2026-11-09",
+        "tipo": "pdf",
+        "arquivo": "guias/ForcaEmocional_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-09"
+      },
+      {
+        "id": "gatilhos-crencas-guia",
+        "titulo": "Guia: Gatilhos e crenças",
+        "descricao": "Como o cérebro liga experiências, a calculadora das crenças, gatilhos nas relações e como conferir se a conta da sua mente está certa.",
+        "data": "2026-11-09",
+        "tipo": "pdf",
+        "arquivo": "guias/GatilhosCrencas_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-09"
+      },
+      {
+        "id": "quem-voce-e-guia",
+        "titulo": "Guia: Quem você é, o que você quer e o que está disposto a fazer",
+        "descricao": "Coragem e complacência, a vida aceitável, o querer concreto e a conta do preço para chegar lá, com um inventário por área da vida.",
+        "data": "2026-11-09",
+        "tipo": "pdf",
+        "arquivo": "guias/QuemVoceE_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-09"
+      },
+      {
+        "id": "disciplina-motivacao-guia",
+        "titulo": "Guia: Disciplina e motivação",
+        "descricao": "Motivação como combustível, fazer bem feito sem ânimo, a imagem do futuro, as duas dores e como ponderar o dia sem largar a prioridade.",
+        "data": "2026-11-09",
+        "tipo": "pdf",
+        "arquivo": "guias/DisciplinaMotivacao_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-09"
+      },
+      {
         "id": "posicionamento-guia",
-        "titulo": "Guia — Posicionamento",
+        "titulo": "Guia: Posicionamento",
         "descricao": "Da compreensão à aplicação: o que é, quando usar, passivo × ativo, estrutura, palavra com poder, cenários (casal, família, trabalho, amizades) e os autoenganos do “já me posicionei”.",
         "data": "2026-11-05",
         "tipo": "pdf",
@@ -169,7 +209,7 @@
       },
       {
         "id": "romantismo-guia",
-        "titulo": "Guia — O que é o romantismo",
+        "titulo": "Guia: O que é o romantismo",
         "descricao": "A lente que distorce a forma como vemos a vida, de onde ela veio, amor × paixão e os 5 níveis explicados pela mesa de comida.",
         "data": "2026-11-02",
         "tipo": "pdf",
@@ -179,7 +219,7 @@
       },
       {
         "id": "parametros-guia",
-        "titulo": "Guia — Parâmetros",
+        "titulo": "Guia: Parâmetros",
         "descricao": "O que são, como definir os seus e como avaliar uma pessoa, ou uma relação, antes que o sentimento decida por você.",
         "data": "2026-11-02",
         "tipo": "pdf",
