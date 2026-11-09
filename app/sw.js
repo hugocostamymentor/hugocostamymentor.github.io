@@ -1,6 +1,6 @@
 /* Service worker do My Mentor — cache offline.
    Ao publicar mudanças no app (HTML/CSS/JS), aumente VERSAO para forçar atualização. */
-var VERSAO = "mymentor-v19";
+var VERSAO = "mymentor-v20";
 var NUCLEO = [
   "vendor/pdfjs/pdf.worker.min.mjs",
   "vendor/pdfjs/README.txt",
