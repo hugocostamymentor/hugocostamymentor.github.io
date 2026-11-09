@@ -29,8 +29,8 @@ main{padding:22px 20px calc(var(--tab-h) + env(safe-area-inset-bottom) + 28px);m
 .link{background:none;border:0;color:var(--bronze);font:inherit;font-size:.9rem;cursor:pointer;padding:0;text-decoration:underline}
 .nota{font-size:.78rem;color:var(--pedra);border-top:1px solid rgba(140,133,122,.4);padding-top:12px;margin-top:24px}
 /* tab bar */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;display:grid;grid-template-columns:repeat(7,1fr);background:var(--obs);border-top:1px solid rgba(168,134,85,.45);padding-bottom:env(safe-area-inset-bottom)}
-.tabs a{height:var(--tab-h);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:var(--pedra);font:600 .6rem var(--sans)}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));background:var(--obs);border-top:1px solid rgba(168,134,85,.45);padding-bottom:env(safe-area-inset-bottom)}
+.tabs a{height:var(--tab-h);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:var(--pedra);font:600 .6rem var(--sans);min-width:0;white-space:nowrap;letter-spacing:-.01em}
 .tabs svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5}
 .tabs a.ativo{color:var(--osso)}
 .tabs a.ativo svg{stroke:var(--oxido)}
@@ -114,3 +114,9 @@ main{padding:22px 20px calc(var(--tab-h) + env(safe-area-inset-bottom) + 28px);m
 .pdf-body{padding:8px 8px calc(8px + env(safe-area-inset-bottom));overscroll-behavior:contain;touch-action:pan-y pinch-zoom;background:#8C857A}
 .pdf-page{width:100%;max-width:1000px;margin:0 auto 12px;background:#fff;color:#17140F;overflow:hidden}
 .pdf-page canvas{display:block;width:100%;height:auto}
+
+/* Jogos: mesma moldura do PDF, com o jogo ocupando o resto da tela. */
+.jogo-body{flex:1;min-height:0;position:relative;background:#17140F;padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.jogo-frame{display:block;width:100%;height:100%;border:0;background:#17140F}
+@media (max-width:370px){.tabs a{font-size:.56rem}.tabs svg{width:21px;height:21px}}
+@media (max-width:340px){.tabs a{font-size:.52rem;letter-spacing:-.02em}}
