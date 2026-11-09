@@ -4,6 +4,7 @@
   var SECOES = {
     testes:    { titulo: "Testes",    rotulo: "Autoconhecimento", vazio: "Novos testes serão publicados aqui." },
     guias:     { titulo: "Guias",     rotulo: "Leitura",          vazio: "Novos guias serão publicados aqui." },
+    jogos:     { titulo: "Jogos",     rotulo: "Experiência",      vazio: "Novos jogos serão publicados aqui." },
     audios:    { titulo: "Áudios",    rotulo: "Escuta",           vazio: "Os áudios serão publicados aqui." },
     videos:    { titulo: "Vídeos",    rotulo: "Aulas e conversas", vazio: "Os vídeos serão publicados aqui." },
     novidades: { titulo: "Novidades", rotulo: "Avisos",           vazio: "Nenhuma novidade por enquanto." }
@@ -35,7 +36,7 @@
     if ((agora || Date.now()) >= fim) return false;
     return vistos().indexOf(nid(i)) < 0;
   }
-  var TIPOS = { teste: "Teste", pdf: "Guia em PDF", audio: "Áudio", video: "Vídeo", youtube: "Vídeo", aviso: "Novidade", link: "Link" };
+  var TIPOS = { teste: "Teste", pdf: "Guia em PDF", audio: "Áudio", video: "Vídeo", youtube: "Vídeo", aviso: "Novidade", link: "Link", jogo: "Jogo" };
 
   function meta(i) {
     return '<div class="meta"><span class="rotulo">' + esc(TIPOS[i.tipo] || i.tipo || "") + " · " + esc(data(i.data)) + (i.tempo ? " · " + esc(i.tempo) : "") + "</span>" +
@@ -45,6 +46,7 @@
     var href = destino(i), extra = "";
     if (i.tipo === "teste") href = "#/abrir/" + encodeURIComponent(secao) + "/" + encodeURIComponent(i.id);
     else if (i.tipo === "pdf") extra = ' data-pdf="true" data-titulo="' + esc(i.titulo) + '"';
+    else if (i.tipo === "jogo") extra = ' data-jogo="true" data-titulo="' + esc(i.titulo) + '"';
     else if (i.tipo === "link") extra = ' target="_blank" rel="noopener"';
     return '<a class="card" data-nid="' + esc(nid(i)) + '" href="' + esc(href) + '"' + extra + ">" + meta(i) + "<h3>" + esc(i.titulo) + "</h3><p>" + esc(i.descricao) + "</p></a>";
   }
@@ -65,7 +67,7 @@
     if (pdfFocus && pdfFocus.isConnected) pdfFocus.focus();
   }
   function fecharPDF() {
-    if (history.state && history.state.mmPDF) history.back();
+    if (history.state && (history.state.mmPDF || history.state.mmJogo)) history.back();
     else removerPDF();
   }
   function abrirPDF(url, titulo, registrar) {
@@ -84,6 +86,29 @@
     pdfOverlay.querySelector("button").focus();
     renderizarPDF(url, pdfOverlay);
     if (registrar) history.pushState({ mmPDF: true, url: url, titulo: titulo }, "", location.href);
+  }
+  /* Jogos: mesma tela cheia e barra "× Fechar" do PDF, com o jogo num iframe da mesma origem
+     (sem sandbox), para o salvamento em localStorage continuar funcionando. */
+  function abrirJogo(url, titulo, registrar) {
+    removerPDF();
+    pdfFocus = document.activeElement; pdfOverflow = document.body.style.overflow;
+    pdfOverlay = document.createElement("section");
+    pdfOverlay.className = "pdf-overlay jogo-overlay";
+    pdfOverlay.setAttribute("role", "dialog");
+    pdfOverlay.setAttribute("aria-modal", "true");
+    pdfOverlay.setAttribute("aria-label", titulo);
+    pdfOverlay.innerHTML = '<header class="pdf-bar"><button type="button" class="pdf-close">× Fechar</button><span class="pdf-title">' + esc(titulo) + '</span></header>' +
+      '<div class="jogo-body"><iframe class="jogo-frame" src="' + esc(url) + '" title="' + esc(titulo) + '" allow="fullscreen"></iframe></div>';
+    document.body.appendChild(pdfOverlay);
+    $("tela-app").inert = true; document.body.style.overflow = "hidden";
+    pdfOverlay.querySelector("button").onclick = fecharPDF;
+    pdfOverlay.querySelector("button").focus();
+    var f = pdfOverlay.querySelector("iframe");
+    f.addEventListener("load", function () {
+      /* Esc dentro do jogo também fecha (o evento não sobe do iframe para o app). */
+      try { f.contentWindow.document.addEventListener("keydown", function (e) { if (e.key === "Escape" && pdfOverlay) { e.preventDefault(); fecharPDF(); } }); } catch (e) {}
+    });
+    if (registrar) history.pushState({ mmJogo: true, url: url, titulo: titulo }, "", location.href);
   }
   /* Render locally: mobile native PDF iframes often show only the first page. */
   function renderizarPDF(url, overlay) {
@@ -161,6 +186,7 @@
 
   window.addEventListener("popstate", function (e) {
     if (e.state && e.state.mmPDF) abrirPDF(e.state.url, e.state.titulo, false);
+    else if (e.state && e.state.mmJogo) abrirJogo(e.state.url, e.state.titulo, false);
     else removerPDF();
   });
   window.addEventListener("hashchange", removerPDF);
@@ -171,6 +197,11 @@
     var a = e.target.closest && e.target.closest("a[data-pdf]");
     if (!a || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
     e.preventDefault(); abrirPDF(a.href, a.dataset.titulo || "Guia em PDF", true);
+  });
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[data-jogo]");
+    if (!a || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault(); abrirJogo(a.href, a.dataset.titulo || "Jogo", true);
   });
 
   /* Componente de áudio com controles próprios */
@@ -237,7 +268,7 @@
     var novas = ordenar(conteudo.secoes.novidades).slice(0, 3);
     var notif = MMNotificacoes.estado();
     return '<p class="rotulo">Sua força &amp; evolução</p><h1>Bem-vindo.</h1>' +
-      '<p class="sec">Este é o seu espaço de acompanhamento: testes, guias, áudios e vídeos preparados por nós para o seu processo.</p>' +
+      '<p class="sec">Este é o seu espaço de acompanhamento: testes, guias, jogos, áudios e vídeos preparados por nós para o seu processo.</p>' +
       '<div class="filete"></div><p class="rotulo">Últimas novidades</p>' +
       (novas.length ? novas.map(function (i) { return card(i, "novidades"); }).join("") : '<p class="sec">Nenhuma novidade por enquanto.</p>') +
       '<p style="margin-top:8px"><a class="link" href="#/novidades">Ver todas</a></p>' +
@@ -338,7 +369,8 @@
   function carregarConteudo() {
     return fetch("content.json", { cache: "no-cache" }).then(function (r) { return r.json(); })
       .then(function (c) { conteudo = c; ligarVistos(); rotear();
-        if (history.state && history.state.mmPDF) abrirPDF(history.state.url, history.state.titulo, false); })
+        if (history.state && history.state.mmPDF) abrirPDF(history.state.url, history.state.titulo, false);
+        else if (history.state && history.state.mmJogo) abrirJogo(history.state.url, history.state.titulo, false); })
       .catch(function () { $("conteudo").innerHTML = '<h1>Sem conexão</h1><p class="sec">Não foi possível carregar o conteúdo. Tente de novo quando estiver online.</p>'; });
   }
 
