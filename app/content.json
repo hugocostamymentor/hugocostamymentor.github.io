@@ -238,6 +238,16 @@
         "arquivo": "jogos/jogo_relacionamentos.html",
         "novo": true,
         "publicado": "2026-11-09"
+      },
+      {
+        "id": "sete-pilares-casal-jogo",
+        "titulo": "Jogo dos 7 pilares para fazer em casal",
+        "descricao": "Um jogo para fazer em casal no mesmo celular. Vocês respondem às perguntas dos 7 pilares, passando o aparelho um para o outro, e no fim veem a nota geral, a teia dos pilares e onde há sintonia ou divergência. O progresso fica salvo neste aparelho.",
+        "data": "2026-11-09",
+        "tipo": "jogo",
+        "arquivo": "jogos/jogo_casal.html",
+        "novo": true,
+        "publicado": "2026-11-09"
       }
     ],
     "audios": [],
@@ -277,6 +287,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "jogo-7-pilares-casal",
+        "titulo": "Disponível: Jogo dos 7 pilares para fazer em casal",
+        "descricao": "Um jogo para o casal responder no mesmo celular, pilar a pilar. No fim, vocês veem a nota geral, a teia dos 7 pilares e onde há sintonia ou divergência.",
+        "data": "2026-11-09",
+        "tipo": "aviso",
+        "url": "#/jogos",
+        "novo": true,
+        "publicado": "2026-11-09"
+      },
       {
         "id": "romantismo-lancamento",
         "titulo": "Disponível: teste e guia de Romantismo",
