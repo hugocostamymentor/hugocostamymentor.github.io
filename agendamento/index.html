@@ -133,6 +133,15 @@ a{color:var(--oxido)}
 <p id="pos" style="display:none">Obrigado. Recebemos seus dados. Entraremos em contato pelo WhatsApp para avançar no seu agendamento.</p>
 </div>
 
+<div class="ok" id="acc">
+<p class="lab">Outras opções</p>
+<h2>Obrigado pela sinceridade.</h2>
+<p>Você gostaria de conhecer opções mais acessíveis, como cursos e e-books?</p>
+<a id="lnk2" class="wbtn" href="#">Sim, quero conhecer pelo WhatsApp</a>
+<p style="margin-top:14px;text-align:center"><a href="#" id="naoq">Não, obrigado(a)</a></p>
+<p id="pos2" style="display:none">Obrigado. Recebemos sua mensagem e vamos te responder pelo WhatsApp.</p>
+</div>
+
 <div class="nao" id="nao">
 <p class="lab">Obrigado</p>
 <h2>Obrigado pela sinceridade.</h2>
@@ -160,20 +169,29 @@ $('fm').addEventListener('submit',e=>{e.preventDefault();
  let first=null;
  document.querySelectorAll('[data-k]').forEach(f=>{const ok=chk[f.dataset.k]!==false;f.classList.toggle('inv',!ok);if(!ok&&!first&&f.offsetParent!==null)first=f});
  if(first){first.scrollIntoView({behavior:'smooth',block:'center'});return}
- if(d.inv==='nao'){$('fm').style.display='none';$('nao').style.display='block';window.scrollTo(0,0);return}
- const L=['*Novo pedido de agendamento*','','*Nome:* '+d.nome,'*Atendimento:* '+d.tipo];
- if(c){L.push('*Parceiro(a):* '+d.nome2);L.push('*Idades:* '+d.nome.split(' ')[0]+' '+d.i1+' · '+d.nome2.split(' ')[0]+' '+d.i2);L.push('*Profissões:* '+d.nome.split(' ')[0]+': '+d.p1+' · '+d.nome2.split(' ')[0]+': '+d.p2)}
- else{L.push('*Idade:* '+d.i1);L.push('*Profissão:* '+d.p1)}
- L.push('*Experiência com acompanhamento:* '+exp.join(' e '));
- L.push('*Nível de sofrimento (0 a 10):* '+d.dor);
- L.push('*Maior necessidade hoje:* '+nec.join('; '));
- L.push('*O que precisa mudar para valer a pena:* '+d.mud);
- const fecha=d.inv==='alto'
-  ?'Estou ciente do investimento (consulta avulsa R$ 480, acompanhamento semanal a partir de R$ 1.700/mês) e gostaria de saber os preços do acompanhamento de alto padrão.'
-  :'Estou ciente do investimento (consulta avulsa R$ 480, acompanhamento semanal a partir de R$ 1.700/mês) e gostaria de seguir com o agendamento.';
- L.push('',fecha);
- const url='https://wa.me/'+NUM+'?text='+encodeURIComponent(L.join('\n'));
- $('lnk').href=url;$('pn').textContent=d.nome.split(' ')[0];
+ const lst=a=>a.length<2?(a[0]||''):a.slice(0,-1).join(', ')+' e '+a[a.length-1];
+ const low=t=>t.charAt(0).toLowerCase()+t.slice(1);
+ const ponto=t=>/[.!?]$/.test(t)?t:t+'.';
+ const P=[];
+ let ap='Olá, Hugo! Meu nome é '+d.nome+', tenho '+d.i1+' anos e sou '+d.p1+'.';
+ if(c){ap+=' Busco atendimento para o casal, junto com '+d.nome2+', que tem '+d.i2+' anos e é '+d.p2+'.'}
+ else{ap+=' Gostaria de agendar uma consulta inicial de atendimento individual.'}
+ P.push(ap);
+ const ex=exp.filter(x=>x!=='Nunca fiz').map(x=>x.toLowerCase());
+ P.push(ex.length?'Já fiz '+lst(ex)+' antes. Hoje, numa escala de 0 a 10, meu nível de sofrimento está em '+d.dor+'.':'Nunca fiz nenhum acompanhamento. Hoje, numa escala de 0 a 10, meu nível de sofrimento está em '+d.dor+'.');
+ P.push('O que mais preciso agora é '+lst(nec.map(low))+'.');
+ P.push('Para mim, o acompanhamento vai ter valido a pena se: '+ponto(low(d.mud)));
+ if(d.inv==='alto')P.push('Também gostaria de saber os valores do acompanhamento de alto padrão.');
+ const wa=t=>'https://wa.me/'+NUM+'?text='+encodeURIComponent(t);
+ const pn=d.nome.split(' ')[0];
+ if(d.inv==='nao'){
+  const Q=P.concat(['No momento, o investimento do acompanhamento não cabe na minha realidade financeira. Gostaria de conhecer opções mais acessíveis, como cursos e e-books.']);
+  $('lnk2').href=wa(Q.join('\n\n'));
+  $('fm').style.display='none';$('acc').style.display='block';window.scrollTo(0,0);
+  $('lnk2').addEventListener('click',()=>{$('pos2').style.display='block'});
+  $('naoq').addEventListener('click',ev=>{ev.preventDefault();$('acc').style.display='none';$('nao').style.display='block';window.scrollTo(0,0)});
+  return}
+ $('lnk').href=wa(P.join('\n\n'));$('pn').textContent=pn;
  $('fm').style.display='none';$('done').style.display='block';window.scrollTo(0,0);
  $('lnk').addEventListener('click',()=>{$('pos').style.display='block'});
 });
