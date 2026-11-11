@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-11-10",
+  "atualizado": "2026-11-11",
   "secoes": {
     "testes": [
       {
@@ -169,6 +169,16 @@
     ],
     "guias": [
       {
+        "id": "mudar-padrao-guia",
+        "titulo": "Guia: Como mudar um padrão",
+        "descricao": "Por que perceber um padrão não basta e o que ajuda a mudar de fato: reconhecer em ato, entender a função, viver o contrário do que se espera, atravessar a transição e ajustar o ambiente. Vale para padrões religiosos ou não.",
+        "data": "2026-11-11",
+        "tipo": "pdf",
+        "arquivo": "guias/MudarPadrao_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-11"
+      },
+      {
         "id": "forca-emocional-guia",
         "titulo": "Guia: Força emocional",
         "descricao": "Observar o pensamento, entender por que uma crítica dói, sentir a emoção no corpo e escolher a ação apesar dela. Inclui inteligência emocional e o “Eu não sou uma máquina”.",
@@ -298,6 +308,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "guia-mudar-padrao",
+        "titulo": "Disponível: guia Como mudar um padrão",
+        "descricao": "Um guia com exercícios para quem quer mudar um padrão que reconhece em si, religioso ou não, e já percebeu que entender sozinho não resolve.",
+        "data": "2026-11-11",
+        "tipo": "aviso",
+        "url": "#/guias",
+        "novo": true,
+        "publicado": "2026-11-11"
+      },
       {
         "id": "teste-medo",
         "titulo": "Disponível: teste Do que você tem medo?",
