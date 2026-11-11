@@ -1,7 +1,18 @@
 {
-  "atualizado": "2026-11-09",
+  "atualizado": "2026-11-10",
   "secoes": {
     "testes": [
+      {
+        "id": "medo",
+        "titulo": "Do que você tem medo?",
+        "descricao": "Descubra qual dos sete medos mais pesa em você (rejeição, fracasso, exposição, abandono, perda de controle, conflito ou sucesso), o nível dele, onde ele interfere e de onde pode vir, com orientações para o seu resultado. Leva uns 8 minutos.",
+        "data": "2026-11-10",
+        "tipo": "teste",
+        "arquivo": "testes/medo.html",
+        "tempo": "8 min",
+        "novo": true,
+        "publicado": "2026-11-10"
+      },
       {
         "id": "romantismo",
         "titulo": "Qual é a sua lente?",
@@ -287,6 +298,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "teste-medo",
+        "titulo": "Disponível: teste Do que você tem medo?",
+        "descricao": "Um teste sobre os sete medos mais comuns, o nível de cada um e o que fazer a partir do seu resultado.",
+        "data": "2026-11-10",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true,
+        "publicado": "2026-11-10"
+      },
       {
         "id": "jogo-7-pilares-casal",
         "titulo": "Disponível: Jogo dos 7 pilares para fazer em casal",
