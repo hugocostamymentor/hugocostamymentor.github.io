@@ -1,7 +1,18 @@
 {
-  "atualizado": "2026-11-11",
+  "atualizado": "2026-11-12",
   "secoes": {
     "testes": [
+      {
+        "id": "relacao",
+        "titulo": "Como está a sua relação?",
+        "descricao": "Veja como estão o convívio, o sentimento, a forma de conversar e os padrões antigos na sua relação, e qual área pesa mais hoje. Leva uns 8 minutos.",
+        "data": "2026-11-12",
+        "tipo": "teste",
+        "arquivo": "testes/relacao.html",
+        "tempo": "8 min",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
       {
         "id": "medo",
         "titulo": "Do que você tem medo?",
@@ -308,6 +319,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "teste-relacao",
+        "titulo": "Disponível: teste Como está a sua relação?",
+        "descricao": "Um teste sobre o convívio, o sentimento, a forma de conversar e os padrões antigos na relação, e qual área pesa mais hoje.",
+        "data": "2026-11-12",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
       {
         "id": "guia-mudar-padrao",
         "titulo": "Disponível: guia Como mudar um padrão",
