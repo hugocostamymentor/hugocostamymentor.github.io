@@ -564,13 +564,13 @@ function textoAvaliacao(Rs,nA,nB){
  const paras=[];
  if(Rs.faixa==='90-100'){
   paras.push(`Nesta partida, as respostas de ${nA} e ${nB} ficaram muito próximas, e os palpites também acertaram bastante. Isso costuma indicar que os dois enxergam a relação de um jeito parecido e que cada um lê o outro com boa precisão. No livro O Amor em Sete Pilares, quando os pilares estão presentes, o sentimento traz paz, completude e tranquilidade. A pessoa deixa de se perguntar o tempo todo se está no lugar certo.`);
-  if(f) paras.push(`O que aparece mais firme aqui é ${f}. Esses pontos merecem ser vistos, não só os que pedem ajuste. Uma promessa cumprida, um obrigado dito com verdade e uma discordância sem desprezo são jeitos concretos de cuidar do que já está de pé.`);
+  if(f) paras.push(`O que aparece mais firme aqui é ${f}. ${fortes.length>1?'Esses pontos merecem ser vistos':'Esse ponto merece ser visto'}, não só os que pedem ajuste. Uma promessa cumprida, um obrigado dito com verdade e uma discordância sem desprezo são jeitos concretos de cuidar do que já está de pé.`);
   else paras.push(`Olhem com o mesmo interesse para o que já está de pé e para o que ainda pode melhorar. Uma promessa cumprida, um obrigado dito com verdade e uma discordância sem desprezo são jeitos concretos de cuidar da casa.`);
   if(w) paras.push(`Mesmo com tanta proximidade, ${w} ${fracos.length>1?'ficaram':'ficou'} um pouco atrás dos outros. Um pilar mais baixo do que os demais não derruba a casa, mas é o lugar mais útil para uma conversa com calma.`);
   else paras.push(`As poucas diferenças que restarem na lista abaixo costumam ser assunto bom para conversar, não sinal de que a casa esteja caindo. Escolham um ponto, olhem juntos e vejam o que cada um quis dizer com a própria resposta.`);
  } else if(Rs.faixa==='80-89'){
   paras.push(`As respostas de ${nA} e ${nB} andam bem próximas na maior parte do jogo, e um conhece o outro com boa margem. Isso costuma indicar uma casa de pé, com alguma parte que ainda balança. A pergunta útil, como no livro, é esta: qual pilar está mais frágil?`);
-  if(f) paras.push(`O que está funcionando melhor é ${f}. Esses pilares sustentam o cotidiano e merecem o mesmo interesse que se dá ao que ainda pede cuidado.`);
+  if(f) paras.push(`O que está funcionando melhor é ${f}. ${fortes.length>1?'Esses pilares sustentam o cotidiano e merecem':'Esse pilar sustenta o cotidiano e merece'} o mesmo interesse que se dá ao que ainda pede cuidado.`);
   else paras.push(`Há muita proximidade nas respostas. Usem isso como chão para olhar, com o mesmo interesse, o ponto que ainda pede cuidado.`);
   if(w) paras.push(`O atrito desta partida aparece com mais clareza em ${w}. No livro, um pilar frágil é um convite para cuidar daquele ponto antes que vire uma rachadura. Comecem por aí, com um ou dois itens, sem tentar resolver tudo de uma vez.`);
   else paras.push(`As divergências que aparecem abaixo já vêm com uma pergunta pronta para conversar. Escolham a que tiverem mais vontade de entender e fiquem nela com calma.`);

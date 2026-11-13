@@ -313,7 +313,7 @@ s7ok:{ act:'III', title:'Depois do aviso',
    p:'A coerência com a ideia de que respeito não merece prêmio.', c:'{P} fica sem saber se o esforço foi visto.', next:'s8'},
   {t:'Aproveitar o clima bom para falar de outras coisas que andam te incomodando.',
    fx:{li:5,co:-5,cf:-5}, res:'{P} escuta, cansad{o}. <q>Parece que nunca é suficiente.</q>',
-   p:'Aproveitar um momento em que a escuta está aberta.', c:'Posicionamento usado com frequência perde efeito. Vira lista de cobranças.', next:'s8'}
+   p:'Um momento em que a escuta está aberta.', c:'Posicionamento usado com frequência perde efeito. Vira lista de cobranças.', next:'s8'}
  ]},
 s7test:{ act:'III', title:'O teste',
  text:s=>`Duas semanas depois, {P} desmarca de novo, com a mesma justificativa. Parece estar medindo se aquilo era sério.`+(s.st.pa<0?`\n\nVocê lembra da pizza no lugar da lasanha. Talvez {P} também lembre.`:''),
@@ -641,7 +641,7 @@ function retrato(){
  const passos=S.hist.map((h,k)=>{const n=NODES[h.node],o=n.opts[h.opt],alts=n.opts.filter((_,j)=>j!==h.opt);
   return `<div class="step"><span class="mono">Cena ${k+1}</span><h4>${R(n.title)}</h4><div class="esc">${R(o.t)}</div>
   <div class="pc"><div class="pp"><b>O que protegeu</b>${R(o.p)}</div><div class="cc"><b>O que custou</b>${R(o.c)}</div></div>
-  <div class="alt">Outros caminhos nesta cena: ${alts.map(a=>`protegeriam ${R(a.p).replace(/\.$/,'').replace(/^./,c=>c.toLowerCase())}`).join('; ')}.</div>
+  <div class="alt">Outros caminhos nesta cena: ${alts.map(a=>`protegeriam ${R(a.p).split('. ')[0].replace(/\.$/,'').replace(/^./,c=>c.toLowerCase())}`).join('; ')}.</div>
   ${ns[h.node]?`<div class="nota">${esc(ns[h.node])}</div>`:''}</div>`}).join('');
  const nNotas=Object.keys(ns).length;
  app.innerHTML=`<section class="ret fade">
