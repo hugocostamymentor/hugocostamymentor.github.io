@@ -3,6 +3,28 @@
   "secoes": {
     "testes": [
       {
+        "id": "posicionamento",
+        "titulo": "Você se posiciona de verdade?",
+        "descricao": "Veja se você de fato se posiciona ou se só imagina que já se posicionou. O teste olha para o amor, a família, o trabalho e as amizades, mostra quais partes do seu posicionamento estão fortes e se o seu tom costuma ser brando ou duro demais. Leva uns 9 minutos.",
+        "data": "2026-11-12",
+        "tipo": "teste",
+        "arquivo": "testes/posicionamento.html",
+        "tempo": "9 min",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
+        "id": "teoria-amor",
+        "titulo": "Como está o amor nesta relação?",
+        "descricao": "Escolha uma relação e veja como estão nela os sete pilares do amor: quais estão de pé, quais estão frágeis e quais estão faltando. Leva uns 10 minutos.",
+        "data": "2026-11-12",
+        "tipo": "teste",
+        "arquivo": "testes/teoria-amor.html",
+        "tempo": "10 min",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
         "id": "relacao",
         "titulo": "Como está a sua relação?",
         "descricao": "Veja como estão o convívio, o sentimento, a forma de conversar e os padrões antigos na sua relação, e qual área pesa mais hoje. Leva uns 8 minutos.",
@@ -180,6 +202,46 @@
     ],
     "guias": [
       {
+        "id": "sete-pilares-guia",
+        "titulo": "Guia: Os 7 pilares do amor",
+        "descricao": "Os sete pilares que sustentam o amor: o que cada um é, como perceber se está de pé e o que fazer quando está frágil ou faltando.",
+        "data": "2026-11-12",
+        "tipo": "pdf",
+        "arquivo": "guias/SetePilares_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
+        "id": "conversar-guia",
+        "titulo": "Guia: Como conversar e resolver conflitos",
+        "descricao": "Como pedir, escutar e chegar a um acordo, com um roteiro para conversas que costumam pesar.",
+        "data": "2026-11-12",
+        "tipo": "pdf",
+        "arquivo": "guias/Conversar_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
+        "id": "medo-guia",
+        "titulo": "Guia: Do que você tem medo",
+        "descricao": "Os sete medos mais comuns, de onde vêm, como aparecem no dia a dia e o que fazer com o que o teste mostrou.",
+        "data": "2026-11-12",
+        "tipo": "pdf",
+        "arquivo": "guias/Medo_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
+        "id": "autorresponsabilidade-guia",
+        "titulo": "Guia: Autorresponsabilidade",
+        "descricao": "O que é assumir a própria parte, a diferença entre culpa e responsabilidade, e como praticar isso no dia a dia.",
+        "data": "2026-11-12",
+        "tipo": "pdf",
+        "arquivo": "guias/Autorresponsabilidade_Guia_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
         "id": "mudar-padrao-guia",
         "titulo": "Guia: Como mudar um padrão",
         "descricao": "Por que perceber um padrão não basta e o que ajuda a mudar de fato: reconhecer em ato, entender a função, viver o contrário do que se espera, atravessar a transição e ajustar o ambiente. Vale para padrões religiosos ou não.",
@@ -319,6 +381,36 @@
       }
     ],
     "novidades": [
+      {
+        "id": "teste-posicionamento",
+        "titulo": "Disponível: teste Você se posiciona de verdade?",
+        "descricao": "Um teste para ver se você de fato se posiciona ou se só imagina que já se posicionou, no amor, na família, no trabalho e nas amizades.",
+        "data": "2026-11-12",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
+        "id": "teste-teoria-amor",
+        "titulo": "Disponível: teste Como está o amor nesta relação?",
+        "descricao": "Um teste sobre os sete pilares do amor numa relação que você escolhe: quais estão de pé, quais estão frágeis e quais estão faltando.",
+        "data": "2026-11-12",
+        "tipo": "aviso",
+        "url": "#/testes",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
+      {
+        "id": "guias-novos-12",
+        "titulo": "Disponível: quatro guias novos",
+        "descricao": "Os 7 pilares do amor, Como conversar e resolver conflitos, Do que você tem medo e Autorresponsabilidade.",
+        "data": "2026-11-12",
+        "tipo": "aviso",
+        "url": "#/guias",
+        "novo": true,
+        "publicado": "2026-11-12"
+      },
       {
         "id": "teste-relacao",
         "titulo": "Disponível: teste Como está a sua relação?",
