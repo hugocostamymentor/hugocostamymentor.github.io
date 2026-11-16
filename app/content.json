@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-11-12",
+  "atualizado": "2026-11-16",
   "secoes": {
     "testes": [
       {
@@ -202,6 +202,86 @@
     ],
     "guias": [
       {
+        "id": "live-evolucao-pessoal-romantismo",
+        "titulo": "A evolução pessoal e o romantismo",
+        "descricao": "O que o romantismo faz com o amor, o trabalho e a imagem que temos de nós mesmos, e seis atitudes que tornam a evolução mais simples, embora não mais confortável.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Evolucao_Pessoal_Romantismo_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-evolucao-forma-facil-dolorosa",
+        "titulo": "A evolução de uma forma fácil, embora dolorosa",
+        "descricao": "Por que evoluir é simples de entender e desconfortável de fazer, e como lidar com as emoções que aparecem no caminho sem deixar que elas decidam por você.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Evolucao_Forma_Facil_Dolorosa_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-formas-evolucao-bolhas",
+        "titulo": "Formas de evolução, bolhas sociais e a importância de ver além",
+        "descricao": "As maneiras diferentes de evoluir, os níveis de romantismo, as bolhas que todos nós formamos e o que isso muda na forma de escolher, ouvir e se relacionar.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Formas_Evolucao_Bolhas_Sociais_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-dissonancia-cognitiva",
+        "titulo": "Dissonância cognitiva, manipulação e romantismo",
+        "descricao": "Por que a mente prefere mentir para si mesma, como isso nos deixa vulneráveis a quem diz o que queremos ouvir e o que muda quando passamos a encarar a nossa parte.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Dissonancia_Cognitiva_Manipulacao_Romantismo_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-moralidade-lealdade",
+        "titulo": "Moralidade e lealdade nas relações",
+        "descricao": "O que é ser leal quando ninguém está olhando, por que a traição nunca vira virtude, como dizer não, fazer acordos que funcionam e usar o poder de decisão que é seu.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Moralidade_e_Lealdade_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-relacionamento-saudavel",
+        "titulo": "Como manter um relacionamento saudável a longo prazo",
+        "descricao": "Leveza, poucas regras, conflitos resolvidos de verdade, divisão justa, empatia com limites, cuidado com o outro e consigo, respeito às diferenças e uma vida sexual que funcione para os dois.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Relacionamento_Saudavel_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-conquistar-encantar",
+        "titulo": "Como conquistar e encantar uma mente humana",
+        "descricao": "Por que a conquista não existe, o que faz alguém se encantar por outra pessoa e o que sustenta esse encantamento com o passar do tempo.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Conquistar_e_Encantar_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
+        "id": "live-neuroplasticidade-linguagens-sexuais",
+        "titulo": "Neuroplasticidade, sinapses neurais e linguagens sexuais",
+        "descricao": "Como o cérebro aprende o que gosta, por que cada pessoa deseja de um jeito e como conversar sobre isso sem julgamento. Conteúdo para maiores de 18 anos.",
+        "data": "2026-11-16",
+        "tipo": "pdf",
+        "arquivo": "guias/Neuroplasticidade_e_Linguagens_Sexuais_CNS_MyMentor.pdf",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
+      {
         "id": "sete-pilares-guia",
         "titulo": "Guia: Os 7 pilares do amor",
         "descricao": "Os sete pilares que sustentam o amor: o que cada um é, como perceber se está de pé e o que fazer quando está frágil ou faltando.",
@@ -381,6 +461,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "lives-cns-8",
+        "titulo": "Disponível: oito materiais das lives do CNS",
+        "descricao": "Publiquei os materiais das oito lives do CNS na aba Guias: a evolução pessoal e o romantismo; a evolução de uma forma fácil, embora dolorosa; formas de evolução, bolhas sociais e a importância de ver além; dissonância cognitiva, manipulação e romantismo; moralidade e lealdade nas relações; como manter um relacionamento saudável a longo prazo; como conquistar e encantar uma mente humana; neuroplasticidade, sinapses neurais e linguagens sexuais.",
+        "data": "2026-11-16",
+        "tipo": "aviso",
+        "url": "#/guias",
+        "novo": true,
+        "publicado": "2026-11-16"
+      },
       {
         "id": "teste-posicionamento",
         "titulo": "Disponível: teste Você se posiciona de verdade?",
