@@ -267,7 +267,7 @@
   function telaInicio() {
     var novas = ordenar(conteudo.secoes.novidades).slice(0, 3);
     var notif = MMNotificacoes.estado();
-    return '<p class="rotulo">Sua força &amp; evolução</p><h1>Bem-vindo.</h1>' +
+    return promoBanner() + '<p class="rotulo">Sua força &amp; evolução</p><h1>Bem-vindo.</h1>' +
       '<p class="sec">Este é o seu espaço de acompanhamento: testes, guias, jogos, áudios e vídeos preparados por nós para o seu processo.</p>' +
       '<div class="filete"></div><p class="rotulo">Últimas novidades</p>' +
       (novas.length ? novas.map(function (i) { return card(i, "novidades"); }).join("") : '<p class="sec">Nenhuma novidade por enquanto.</p>') +
@@ -331,6 +331,115 @@
       (i.tipo === "teste" ? '<p class="nota">' + NOTA_TESTES + "</p>" : "");
   }
 
+  /* Promoção em destaque (content.json > "promocao"). Some sozinha a partir de "fim"
+     (data com fuso, ex.: "2026-12-01T00:00:00-03:00"), conferido no carregamento, ao voltar ao app e no horário exato.
+     Sem "fim" válido, a promoção não aparece. */
+  var promoEl = null, promoFoco = null, promoTimer = null;
+  function promo() {
+    var p = conteudo && conteudo.promocao;
+    if (!p || p.ativo === false) return null;
+    var fim = Date.parse(p.fim || "");
+    if (isNaN(fim) || Date.now() >= fim) return null;
+    return p;
+  }
+  function promoPrazo(p) {
+    try { return new Date(Date.parse(p.fim) - 1).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit", month: "2-digit" }); } catch (e) { return ""; }
+  }
+  function promoHoje() {
+    try { return new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" }); } catch (e) { return new Date().toISOString().slice(0, 10); }
+  }
+  function promoWa(p) {
+    var base = (conteudo.precos && conteudo.precos.contato && conteudo.precos.contato.whatsapp) || ("https://api.whatsapp.com/send?phone=" + (self.MM_WHATSAPP || "5531984239778"));
+    return base + (base.indexOf("?") >= 0 ? "&" : "?") + "text=" + encodeURIComponent(p.mensagem || "");
+  }
+  function promoBotaoWa(p) {
+    return '<a class="btn primario bloco wa" data-promo-wa href="' + esc(promoWa(p)) + '" target="_blank" rel="noopener">' + WA_SVG + esc(p.botao || "Falar no WhatsApp") + '</a>';
+  }
+  function promoBanner() {
+    var p = promo(); if (!p) return "";
+    try { if (sessionStorage.getItem("mm_promo_banner") === p.id) return ""; } catch (e) {}
+    var prazo = promoPrazo(p);
+    return '<section class="promo-banner" id="promo-banner" aria-label="' + esc(p.titulo) + '">' +
+      '<button class="promo-x" type="button" data-promo-banner-fechar aria-label="Fechar oferta">×</button>' +
+      '<p class="rotulo">' + esc(p.rotulo) + (prazo ? " · até " + esc(prazo) : "") + '</p>' +
+      '<h2>' + esc(p.titulo) + '</h2>' +
+      '<div class="promo-preco"><p class="de"><span class="rotulo">de</span><s>' + esc(p.de) + '</s></p>' +
+      '<p class="por"><span class="rotulo">por</span><strong>' + esc(p.por) + '</strong><span class="suf">' + esc(p.sufixo || "") + '</span></p></div>' +
+      '<p class="sec">' + esc(p.texto) + '</p>' +
+      promoBotaoWa(p) +
+      '<button class="link promo-ver" type="button" data-promo-abrir>Ver detalhes da oferta</button></section>';
+  }
+  function promoVista(v) {
+    if (!promoEl) return;
+    promoEl.querySelectorAll(".promo-vista").forEach(function (x) { x.classList.toggle("oculto", x.dataset.vista !== v); });
+    promoEl.querySelector(".promo-painel").scrollTop = 0;
+    var alvo = promoEl.querySelector('.promo-vista[data-vista="' + v + '"] [data-foco]'); if (alvo) alvo.focus();
+  }
+  function fecharPromo() {
+    if (!promoEl) return;
+    promoEl.remove(); promoEl = null;
+    $("tela-app").inert = !!pdfOverlay;
+    if (!pdfOverlay) document.body.style.overflow = "";
+    if (promoFoco && promoFoco.isConnected) promoFoco.focus();
+  }
+  function abrirPromo(vista) {
+    var p = promo(); if (!p || promoEl) return;
+    promoFoco = document.activeElement;
+    promoEl = document.createElement("section");
+    promoEl.className = "promo-overlay";
+    promoEl.setAttribute("role", "dialog");
+    promoEl.setAttribute("aria-modal", "true");
+    promoEl.setAttribute("aria-label", p.titulo);
+    promoEl.innerHTML = '<div class="promo-painel" tabindex="-1">' +
+      '<button class="promo-x" type="button" data-promo-fechar aria-label="Fechar">×</button>' +
+      '<div class="promo-vista" data-vista="oferta">' +
+        '<img class="promo-arte" src="' + esc(p.imagem) + '" alt="' + esc(p.imagem_alt || p.titulo) + '" width="1080" height="1350" decoding="async">' +
+        '<div class="promo-corpo"><p class="sec">' + esc(p.texto) + '</p>' + promoBotaoWa(p) +
+        '<div class="promo-acoes">' + (p.detalhes ? '<button class="btn" type="button" data-promo-detalhes>Ver detalhes</button>' : "") +
+        '<button class="btn" type="button" data-promo-fechar data-foco>Agora não</button></div></div></div>' +
+      (p.detalhes ? '<div class="promo-vista oculto" data-vista="detalhes">' +
+        '<img class="promo-arte" src="' + esc(p.detalhes) + '" alt="' + esc(p.detalhes_alt || p.titulo) + '" width="1080" height="1680" loading="lazy" decoding="async">' +
+        '<div class="promo-corpo">' + promoBotaoWa(p) +
+        '<div class="promo-acoes"><button class="btn" type="button" data-promo-oferta data-foco>Voltar</button>' +
+        '<button class="btn" type="button" data-promo-fechar>Fechar</button></div></div></div>' : "") +
+      '</div>';
+    document.body.appendChild(promoEl);
+    $("tela-app").inert = true; document.body.style.overflow = "hidden";
+    promoEl.addEventListener("click", function (e) {
+      var t = e.target;
+      if (t === promoEl || t.closest("[data-promo-fechar]")) { e.preventDefault(); fecharPromo(); }
+      else if (t.closest("[data-promo-detalhes]")) promoVista("detalhes");
+      else if (t.closest("[data-promo-oferta]")) promoVista("oferta");
+    });
+    try { localStorage.setItem("mm_promo_visto", p.id + "|" + promoHoje()); } catch (e) {}
+    if (vista === "detalhes") promoVista("detalhes"); else promoEl.querySelector(".promo-painel").focus({ preventScroll: true });
+  }
+  /* Ao abrir o app: mostra a oferta uma vez por dia neste aparelho (o banner do Início continua lá). */
+  function promoAoAbrir() {
+    var p = promo(); if (!p) return;
+    try { if (localStorage.getItem("mm_promo_visto") === p.id + "|" + promoHoje()) return; } catch (e) {}
+    abrirPromo();
+  }
+  function promoConferir() {
+    clearTimeout(promoTimer);
+    var p = conteudo && conteudo.promocao;
+    if (!promo()) {
+      fecharPromo();
+      var bn = $("promo-banner"); if (bn) bn.remove();
+      return;
+    }
+    var falta = Date.parse(p.fim) - Date.now();
+    promoTimer = setTimeout(promoConferir, Math.min(Math.max(falta, 1000), 6 * 3600e3));
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[data-promo-wa]");
+    if (a && !promo()) { e.preventDefault(); promoConferir(); }
+  }, true);
+  document.addEventListener("keydown", function (e) {
+    if (promoEl && e.key === "Escape") { e.preventDefault(); e.stopImmediatePropagation(); fecharPromo(); }
+  }, true);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible" && conteudo) promoConferir(); });
+
   function rotear() {
     if (!conteudo) return;
     var partes = (location.hash.replace(/^#\/?/, "") || "inicio").split("/").map(decodeURIComponent);
@@ -349,6 +458,13 @@
     });
     $("wa-flutuante").classList.toggle("oculto", aba === "precos" || aba === "inicio");
     main.querySelectorAll("[data-copiar]").forEach(function (b) { b.onclick = function () { copiar(b.dataset.copiar); }; });
+    main.querySelectorAll("[data-promo-abrir]").forEach(function (b) { b.onclick = function () { abrirPromo(); }; });
+    main.querySelectorAll("[data-promo-banner-fechar]").forEach(function (b) {
+      b.onclick = function () {
+        var p = promo(); try { if (p) sessionStorage.setItem("mm_promo_banner", p.id); } catch (e) {}
+        var bn = $("promo-banner"); if (bn) bn.remove();
+      };
+    });
     ligarPlayers(main);
     main.querySelectorAll(".yt-capa").forEach(function (b) {
       b.onclick = function () {
@@ -370,7 +486,8 @@
     return fetch("content.json", { cache: "no-cache" }).then(function (r) { return r.json(); })
       .then(function (c) { conteudo = c; ligarVistos(); rotear();
         if (history.state && history.state.mmPDF) abrirPDF(history.state.url, history.state.titulo, false);
-        else if (history.state && history.state.mmJogo) abrirJogo(history.state.url, history.state.titulo, false); })
+        else if (history.state && history.state.mmJogo) abrirJogo(history.state.url, history.state.titulo, false);
+        promoConferir(); promoAoAbrir(); })
       .catch(function () { $("conteudo").innerHTML = '<h1>Sem conexão</h1><p class="sec">Não foi possível carregar o conteúdo. Tente de novo quando estiver online.</p>'; });
   }
 
