@@ -422,6 +422,16 @@
     ],
     "jogos": [
       {
+        "id": "ramificacao-da-vida-jogo",
+        "titulo": "Ramificação da Vida",
+        "descricao": "Um jogo de escolhas sobre a evolução de uma pessoa dos 17 aos 42 anos. Você decide estudos, trabalho, amizades, saúde e relacionamentos, enfrenta imprevistos e chega a um dos dez finais possíveis, com um retrato do caminho que construiu. O progresso fica salvo neste aparelho.",
+        "data": "2026-11-17",
+        "tipo": "jogo",
+        "arquivo": "jogos/ramificacao_da_vida.html",
+        "novo": true,
+        "publicado": "2026-11-17"
+      },
+      {
         "id": "entre-nos-jogo",
         "titulo": "Entre Nós",
         "descricao": "Um jogo de escolhas sobre relacionamentos. Você vive cenas comuns de uma relação, escolhe como reagir e, no fim, recebe um retrato do que suas escolhas protegeram e do que elas custaram. O progresso fica salvo neste aparelho.",
@@ -479,6 +489,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "jogo-ramificacao-da-vida",
+        "titulo": "Disponível: jogo Ramificação da Vida",
+        "descricao": "Um jogo de escolhas dos 17 aos 42 anos, com imprevistos, dez finais possíveis e um retrato do caminho que você construiu.",
+        "data": "2026-11-17",
+        "tipo": "aviso",
+        "url": "#/jogos",
+        "novo": true,
+        "publicado": "2026-11-17"
+      },
       {
         "id": "lives-cns-8",
         "titulo": "Disponível: oito materiais das lives do CNS",
