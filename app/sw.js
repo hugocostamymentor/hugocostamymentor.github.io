@@ -1,6 +1,6 @@
 /* Service worker do My Mentor — cache offline.
    Ao publicar mudanças no app (HTML/CSS/JS), aumente VERSAO para forçar atualização. */
-var VERSAO = "mymentor-v29";
+var VERSAO = "mymentor-v30";
 var NUCLEO = [
   "vendor/pdfjs/pdf.worker.min.mjs",
   "vendor/pdfjs/README.txt",
@@ -229,6 +229,7 @@ var NUCLEO = [
   "testes/regulacao-emocional.html",
   "testes/medo.html",
   "jogos/ramificacao_da_vida.html",
+  "jogos/caminho_a_dois.html",
   "jogos/jogo_relacionamentos.html",
   "jogos/jogo_casal.html",
   "assets/thumbs/qEl2NoMdEFU.jpg", "assets/thumbs/V0T4WCDQNic.jpg", "assets/thumbs/As622_zJZ94.jpg"
