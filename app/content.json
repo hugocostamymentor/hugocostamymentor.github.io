@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-11-17",
+  "atualizado": "2026-11-18",
   "promocao": {
     "id": "mentoria-premium-nov-2026",
     "ativo": true,
@@ -422,6 +422,16 @@
     ],
     "jogos": [
       {
+        "id": "caminho-a-dois-jogo",
+        "titulo": "Caminho a Dois",
+        "descricao": "Um jogo de situações a dois. Você escolhe o casal, responde como agiria em cada momento e acompanha os dois caminhando juntos ou se afastando. No fim, mostro o que sustentou ou faltou na relação, no básico, no amor e no dia a dia.",
+        "data": "2026-11-18",
+        "tipo": "jogo",
+        "arquivo": "jogos/caminho_a_dois.html",
+        "novo": true,
+        "publicado": "2026-11-18"
+      },
+      {
         "id": "ramificacao-da-vida-jogo",
         "titulo": "Ramificação da Vida",
         "descricao": "Um jogo de escolhas sobre a evolução de uma pessoa dos 17 aos 42 anos. Você decide estudos, trabalho, amizades, saúde e relacionamentos, enfrenta imprevistos e chega a um dos dez finais possíveis, com um retrato do caminho que construiu. O progresso fica salvo neste aparelho.",
@@ -489,6 +499,16 @@
       }
     ],
     "novidades": [
+      {
+        "id": "jogo-caminho-a-dois",
+        "titulo": "Disponível: jogo Caminho a Dois",
+        "descricao": "Escolha o casal, responda às situações e veja aonde o caminho dos dois leva.",
+        "data": "2026-11-18",
+        "tipo": "aviso",
+        "url": "#/jogos",
+        "novo": true,
+        "publicado": "2026-11-18"
+      },
       {
         "id": "jogo-ramificacao-da-vida",
         "titulo": "Disponível: jogo Ramificação da Vida",
